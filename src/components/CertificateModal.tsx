@@ -68,7 +68,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
           <div className="flex items-start gap-4">
             {/* Mascot celebrating the achievement */}
             <div className="hidden sm:block shrink-0 -mt-2">
-              <MiluCharacter pose="certificate" size="sm" interactive={false} className="w-14 h-18" />
+              <MiluCharacter pose="certificate" size="sm" mode="photo" interactive={false} className="w-14 h-14" />
             </div>
 
             <div>

@@ -104,7 +104,7 @@ export const ProjectsSection: React.FC = () => {
             <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
               {/* Mascot Cameo for Cardora */}
               <div className="flex items-center gap-3">
-                <MiluCharacter pose="cardora-plant" size="sm" className="w-14 h-18 shrink-0" />
+                <MiluCharacter pose="cardora-plant" size="sm" mode="photo" className="w-14 h-14 shrink-0" />
                 <div className="p-3 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 backdrop-blur-md">
                   <span className="text-[10px] font-mono-code uppercase font-bold text-emerald-400 block mb-0.5 flex items-center gap-1">
                     <Sparkles className="w-3 h-3 text-emerald-400" /> Cardora Story:

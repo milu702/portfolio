@@ -162,7 +162,7 @@ export const HeroSection: React.FC = () => {
           {/* Animated Mascot Cameo Greeting Header */}
           <div className="flex items-center gap-3 mb-6">
             <div onClick={handleMascotGreet} className="cursor-pointer group relative">
-              <MiluCharacter pose="wave" size="sm" className="w-14 h-18 group-hover:scale-110 transition-transform" />
+              <MiluCharacter pose="wave" size="sm" mode="photo" className="w-14 h-14 group-hover:scale-110 transition-transform" />
               <span className="absolute -top-1 -right-1 px-1.5 py-0.2 rounded-full text-[8px] font-mono-code font-bold bg-[#00e5ff] text-[#020408] shadow">
                 Tap!
               </span>

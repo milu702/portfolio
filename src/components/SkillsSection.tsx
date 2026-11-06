@@ -159,7 +159,7 @@ export const SkillsSection: React.FC = () => {
 
               {/* Coding Mascot Cameo */}
               <div className="pt-4 border-t border-white/[0.06] flex items-center gap-3">
-                <MiluCharacter pose="coding" size="sm" className="w-12 h-16 shrink-0" />
+                <MiluCharacter pose="coding" size="sm" mode="photo" className="w-12 h-12 shrink-0" />
                 <div className="p-2.5 rounded-xl bg-white/[0.03] border border-[#00e5ff]/20 text-[11px] font-mono-code text-slate-300">
                   <span className="text-[#00e5ff] font-bold block mb-0.5">Milu is Coding:</span>
                   "Select any skill node to see how I implemented it in my projects!"

@@ -11,12 +11,15 @@ export type CharacterPose =
   | 'curious'
   | 'jump';
 
+export type CharacterMode = 'vector' | 'photo' | 'photo-suit';
+
 interface MiluCharacterProps {
   pose?: CharacterPose;
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   onClick?: () => void;
   interactive?: boolean;
+  mode?: CharacterMode;
 }
 
 export const MiluCharacter: React.FC<MiluCharacterProps> = ({
@@ -25,6 +28,7 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
   size = 'md',
   onClick,
   interactive = true,
+  mode = 'vector',
 }) => {
   // Size mapping
   const sizeClasses = {
@@ -34,6 +38,79 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
     xl: 'w-48 h-60',
   }[size];
 
+  const photoSizeClasses = {
+    sm: 'w-16 h-16',
+    md: 'w-24 h-24',
+    lg: 'w-36 h-36',
+    xl: 'w-48 h-48',
+  }[size];
+
+  // Pose emoji / badge overlay for photo mode
+  const poseBadges: Record<CharacterPose, { emoji: string; label: string }> = {
+    idle: { emoji: '✨', label: 'Online' },
+    wave: { emoji: '👋', label: 'Welcome!' },
+    coding: { emoji: '💻', label: 'Building' },
+    certificate: { emoji: '📜', label: 'Verified' },
+    'cardora-plant': { emoji: '🌱', label: 'Cardora' },
+    pointing: { emoji: '👉', label: 'Explore' },
+    celebrating: { emoji: '🏆', label: 'Honours' },
+    curious: { emoji: '🔍', label: 'Curious' },
+    jump: { emoji: '🚀', label: 'Ready' },
+  };
+
+  // PHOTO MODE: Uses Milu's real smiling portrait with interactive glowing ring & pose badge
+  if (mode === 'photo' || mode === 'photo-suit') {
+    const imgSrc =
+      mode === 'photo-suit'
+        ? '/assets/profile/milu-official-suit.jpg'
+        : '/assets/profile/milu-college-portrait.png';
+    const badge = poseBadges[pose] || poseBadges.idle;
+
+    return (
+      <div
+        onClick={onClick}
+        className={`relative inline-block select-none ${photoSizeClasses} ${
+          interactive
+            ? 'cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95'
+            : ''
+        } ${className}`}
+        role="img"
+        aria-label={`Milu Jiji portrait in ${pose} state`}
+      >
+        {/* Ambient Outer Halo */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#00e5ff]/30 via-[#3b82f6]/20 to-[#818cf8]/30 blur-md pointer-events-none" />
+
+        {/* Outer Rotating/Pulse Tech Ring */}
+        <div className="absolute -inset-1 rounded-full p-[2px] bg-gradient-to-tr from-[#00e5ff] via-transparent to-[#38bdf8] animate-spin-slow opacity-80" />
+
+        {/* Real Photograph Image Frame */}
+        <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-white/20 bg-[#070d18] shadow-[0_10px_25px_rgba(0,0,0,0.6)]">
+          <img
+            src={imgSrc}
+            alt="Milu Jiji real portrait"
+            className="w-full h-full object-cover object-top contrast-[1.04]"
+          />
+          {/* Subtle Glass Sheen */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020408]/40 via-transparent to-transparent pointer-events-none" />
+        </div>
+
+        {/* Live Status Indicator Dot */}
+        <div className="absolute top-0 right-1 w-3 h-3 rounded-full bg-[#10b981] border-2 border-[#070d18] shadow-sm animate-pulse" />
+
+        {/* Pose / Action Badge Pill */}
+        <div className="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded-full bg-[#070d18]/90 border border-[#00e5ff]/40 shadow-lg flex items-center gap-1 backdrop-blur-md">
+          <span className="text-[11px] leading-none">{badge.emoji}</span>
+          {size !== 'sm' && (
+            <span className="text-[8px] font-mono-code font-bold text-[#00e5ff] uppercase tracking-wider pr-0.5">
+              {badge.label}
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // VECTOR MODE: Faithful, elegant likeness matching Milu's facial features and uniform
   return (
     <div
       onClick={onClick}
@@ -41,7 +118,7 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
         interactive ? 'cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95' : ''
       } ${className}`}
       role="img"
-      aria-label={`Cartoon avatar of Milu Jiji in ${pose} pose`}
+      aria-label={`Illustrated avatar of Milu Jiji in ${pose} pose`}
     >
       <svg
         viewBox="0 0 200 240"
@@ -50,38 +127,48 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
         className="w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
       >
         <defs>
-          {/* Skin and Hair Gradients */}
+          {/* Authentic Warm Golden-Wheatish Skin Tones */}
           <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#C68962" />
-            <stop offset="100%" stopColor="#AD714D" />
+            <stop offset="0%" stopColor="#F2CFB7" />
+            <stop offset="65%" stopColor="#E0B08E" />
+            <stop offset="100%" stopColor="#C99068" />
           </linearGradient>
 
-          <linearGradient id="hairGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id="skinShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#C99068" />
+            <stop offset="100%" stopColor="#A86E48" />
+          </linearGradient>
+
+          {/* Natural Dark Hair with Subtle Sheen */}
+          <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#251C1A" />
-            <stop offset="100%" stopColor="#140E0D" />
+            <stop offset="45%" stopColor="#1B1413" />
+            <stop offset="100%" stopColor="#0E0A09" />
           </linearGradient>
 
+          {/* Amal Jyothi Autonomous Navy Uniform Vest */}
           <linearGradient id="vestGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#1e293b" />
             <stop offset="100%" stopColor="#0f172a" />
           </linearGradient>
 
+          {/* Light Blue Striped Collared Shirt */}
           <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#e0f2fe" />
-            <stop offset="100%" stopColor="#bae6fd" />
+            <stop offset="0%" stopColor="#f0f9ff" />
+            <stop offset="100%" stopColor="#dbeafe" />
           </linearGradient>
 
+          {/* Cyan Glow & Accents */}
           <linearGradient id="glowCyan" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#00e5ff" />
             <stop offset="100%" stopColor="#38bdf8" />
           </linearGradient>
 
           <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#fbbf24" />
+            <stop offset="0%" stopColor="#fcd34d" />
             <stop offset="100%" stopColor="#d97706" />
           </linearGradient>
 
-          {/* Plant Leaf Gradient */}
           <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#4ade80" />
             <stop offset="100%" stopColor="#15803d" />
@@ -99,11 +186,11 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
             }
             @keyframes armWave {
               0%, 100% { transform: rotate(0deg); }
-              50% { transform: rotate(-22deg); }
+              50% { transform: rotate(-20deg); }
             }
             @keyframes propFloat {
               0%, 100% { transform: translateY(0px) rotate(0deg); }
-              50% { transform: translateY(-4px) rotate(3deg); }
+              50% { transform: translateY(-4px) rotate(2deg); }
             }
             @keyframes typingHands {
               0%, 100% { transform: translateY(0); }
@@ -114,7 +201,7 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
               50% { opacity: 1; transform: scale(1.2); }
             }
             .animate-breathe { animation: charBreathe 3.5s ease-in-out infinite; transform-origin: bottom center; }
-            .animate-blink { animation: charBlink 4s infinite; transform-origin: 100px 92px; }
+            .animate-blink { animation: charBlink 4.5s infinite; transform-origin: 100px 92px; }
             .animate-wave-arm { animation: armWave 1s ease-in-out infinite; transform-origin: 145px 145px; }
             .animate-prop { animation: propFloat 2.4s ease-in-out infinite; }
             .animate-type { animation: typingHands 0.4s ease-in-out infinite alternate; }
@@ -122,221 +209,251 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
           `}</style>
         </defs>
 
-        {/* Ambient Glow Aura */}
-        <ellipse cx="100" cy="225" rx="55" ry="10" fill="#00e5ff" opacity="0.18" />
+        {/* Ambient Ground Glow Aura */}
+        <ellipse cx="100" cy="226" rx="55" ry="9" fill="#00e5ff" opacity="0.16" />
 
         {/* Main Character Body Container with Breathing Motion */}
         <g className="animate-breathe">
-          {/* Back Ponytail / Bun */}
-          <circle cx="100" cy="52" r="28" fill="url(#hairGrad)" />
+          {/* Back Ponytail (Low behind neck, natural hairstyle) */}
           <path
-            d="M85 65 C85 45, 115 45, 115 65 C115 80, 85 80, 85 65 Z"
-            fill="#140E0D"
+            d="M88 105 C84 135, 88 165, 96 175 C100 175, 104 175, 104 175 C112 165, 116 135, 112 105 Z"
+            fill="url(#hairGrad)"
           />
+          {/* Ponytail Hair Tie */}
+          <ellipse cx="100" cy="120" rx="9" ry="3" fill="#00e5ff" opacity="0.8" />
 
-          {/* Torso / Upper Body */}
-          {/* Inner Light Blue Striped Collared Shirt */}
+          {/* Torso: Light Blue Pinstriped Collared Shirt */}
           <path
             d="M75 140 L125 140 L135 220 L65 220 Z"
             fill="url(#shirtGrad)"
           />
 
-          {/* Thin Vertical Stripes on Shirt */}
-          <line x1="88" y1="140" x2="84" y2="220" stroke="#7dd3fc" strokeWidth="1.5" opacity="0.6" />
-          <line x1="100" y1="140" x2="100" y2="220" stroke="#7dd3fc" strokeWidth="1.5" opacity="0.6" />
-          <line x1="112" y1="140" x2="116" y2="220" stroke="#7dd3fc" strokeWidth="1.5" opacity="0.6" />
+          {/* Subtle Vertical Stripes */}
+          <line x1="86" y1="140" x2="82" y2="220" stroke="#93c5fd" strokeWidth="1.2" opacity="0.5" />
+          <line x1="100" y1="140" x2="100" y2="220" stroke="#93c5fd" strokeWidth="1.2" opacity="0.5" />
+          <line x1="114" y1="140" x2="118" y2="220" stroke="#93c5fd" strokeWidth="1.2" opacity="0.5" />
 
-          {/* Formal Dark Waistcoat / Vest */}
+          {/* Amal Jyothi Navy Uniform Vest */}
           <path
-            d="M75 140 L90 140 L82 220 L65 220 Z"
+            d="M75 140 L88 140 L80 220 L65 220 Z"
             fill="url(#vestGrad)"
           />
           <path
-            d="M125 140 L110 140 L118 220 L135 220 Z"
+            d="M125 140 L112 140 L120 220 L135 220 Z"
             fill="url(#vestGrad)"
           />
-
-          {/* Waistcoat V-Neck Trim */}
+          {/* V-Neck Vest Cutout */}
           <path
-            d="M75 140 L100 175 L125 140 L135 155 L100 200 L65 155 Z"
+            d="M75 140 L100 174 L125 140 L135 154 L100 198 L65 154 Z"
             fill="url(#vestGrad)"
           />
 
           {/* Vest Buttons */}
-          <circle cx="100" cy="182" r="2" fill="#cbd5e1" />
-          <circle cx="100" cy="195" r="2" fill="#cbd5e1" />
-          <circle cx="100" cy="208" r="2" fill="#cbd5e1" />
+          <circle cx="100" cy="180" r="1.8" fill="#94a3b8" />
+          <circle cx="100" cy="193" r="1.8" fill="#94a3b8" />
+          <circle cx="100" cy="206" r="1.8" fill="#94a3b8" />
 
-          {/* Azure / Amal Jyothi ID Badge Lanyard ribbon */}
+          {/* Azure Lanyard Ribbon */}
           <path
-            d="M93 140 L97 185 L103 185 L107 140"
+            d="M93 140 L97 184 L103 184 L107 140"
             stroke="#00e5ff"
-            strokeWidth="2.5"
+            strokeWidth="2.2"
             fill="none"
             opacity="0.85"
           />
-          {/* Little Lanyard ID Card */}
+          {/* Student ID Card Badge */}
           <rect
             x="94"
-            y="185"
+            y="184"
             width="12"
             height="18"
             rx="2"
-            fill="#f8fafc"
+            fill="#ffffff"
             stroke="#00e5ff"
-            strokeWidth="1"
+            strokeWidth="0.9"
           />
-          <rect x="96" y="190" width="8" height="3" fill="#0284c7" />
-          <rect x="96" y="195" width="8" height="1.5" fill="#94a3b8" />
+          <rect x="96" y="188" width="8" height="3" fill="#0284c7" />
+          <rect x="96" y="193" width="8" height="1.5" fill="#cbd5e1" />
 
-          {/* Formal Shirt Collar Wings */}
+          {/* White Shirt Collar Wings */}
           <path
-            d="M86 134 L100 148 L92 148 Z"
-            fill="#f8fafc"
+            d="M86 135 L100 148 L93 148 Z"
+            fill="#ffffff"
             stroke="#cbd5e1"
-            strokeWidth="1"
+            strokeWidth="0.9"
           />
           <path
-            d="M114 134 L100 148 L108 148 Z"
-            fill="#f8fafc"
+            d="M114 135 L100 148 L107 148 Z"
+            fill="#ffffff"
             stroke="#cbd5e1"
-            strokeWidth="1"
+            strokeWidth="0.9"
           />
 
           {/* Neck */}
-          <rect x="92" y="120" width="16" height="20" rx="3" fill="url(#skinGrad)" />
+          <rect x="92" y="122" width="16" height="18" rx="2" fill="url(#skinGrad)" />
+          {/* Subtle Neck Shadow Under Jaw */}
+          <ellipse cx="100" cy="123" rx="9" ry="2.5" fill="url(#skinShadow)" opacity="0.4" />
 
-          {/* Head & Face */}
-          <ellipse cx="100" cy="92" rx="36" ry="38" fill="url(#skinGrad)" />
+          {/* Head & Natural Oval Face */}
+          <ellipse cx="100" cy="92" rx="35" ry="37" fill="url(#skinGrad)" />
 
-          {/* Natural Hair Styling - Front and Sides */}
+          {/* Natural Hair Contour (NO tall bun, natural rounded crown with headband) */}
           <path
-            d="M64 90 C62 60, 75 50, 100 50 C125 50, 138 60, 136 90 C132 70, 122 62, 100 62 C78 62, 68 70, 64 90 Z"
+            d="M65 92 C65 54, 135 54, 135 92 C132 68, 122 58, 100 58 C78 58, 68 68, 65 92 Z"
             fill="url(#hairGrad)"
           />
-          {/* Soft Hair Parting & Side Bangs */}
+          {/* Black Headband across hair */}
           <path
-            d="M72 70 Q95 72 102 85 Q80 78 72 70 Z"
-            fill="#231917"
-            opacity="0.9"
+            d="M66 84 C68 59, 132 59, 134 84"
+            stroke="#111827"
+            strokeWidth="3.2"
+            fill="none"
+            strokeLinecap="round"
+          />
+          {/* Soft Hair Parting Wisps */}
+          <path
+            d="M72 70 Q95 71 100 80 Q82 76 72 70 Z"
+            fill="#160f0d"
+            opacity="0.95"
           />
           <path
-            d="M128 70 Q105 72 98 85 Q120 78 128 70 Z"
-            fill="#231917"
-            opacity="0.9"
+            d="M128 70 Q105 71 100 80 Q118 76 128 70 Z"
+            fill="#160f0d"
+            opacity="0.95"
           />
 
-          {/* Ears with Gold Studs */}
-          <circle cx="64" cy="94" r="6" fill="url(#skinGrad)" />
-          <circle cx="63" cy="95" r="1.8" fill="url(#goldGrad)" />
-          <circle cx="136" cy="94" r="6" fill="url(#skinGrad)" />
-          <circle cx="137" cy="95" r="1.8" fill="url(#goldGrad)" />
+          {/* Ears with Elegant Gold Studs */}
+          <circle cx="64" cy="94" r="5.5" fill="url(#skinGrad)" />
+          <circle cx="63.5" cy="95" r="1.6" fill="url(#goldGrad)" />
+          <circle cx="136" cy="94" r="5.5" fill="url(#skinGrad)" />
+          <circle cx="136.5" cy="95" r="1.6" fill="url(#goldGrad)" />
 
-          {/* Forehead Bindi */}
-          <circle cx="100" cy="80" r="1.8" fill="#1e1b18" />
+          {/* Small Delicate Centered Forehead Bindi */}
+          <circle cx="100" cy="79" r="1.3" fill="#181311" />
 
-          {/* Eyebrows (neatly shaped arches) */}
+          {/* Separated, Elegant Natural Eyebrows (NO unibrow!) */}
           <path
-            d="M80 82 Q88 78 95 82"
-            stroke="#1c1412"
-            strokeWidth="2.4"
+            d="M76 81 Q85 76 93 80"
+            stroke="#201715"
+            strokeWidth="1.9"
             strokeLinecap="round"
             fill="none"
           />
           <path
-            d="M105 82 Q112 78 120 82"
-            stroke="#1c1412"
-            strokeWidth="2.4"
+            d="M107 80 Q115 76 124 81"
+            stroke="#201715"
+            strokeWidth="1.9"
             strokeLinecap="round"
             fill="none"
           />
 
-          {/* Expressive Warm Dark Almond Eyes */}
+          {/* Natural Warm Almond Eyes */}
           <g className="animate-blink">
             {/* Left Eye */}
-            <ellipse cx="87" cy="92" rx="6.5" ry="6.5" fill="#1f1614" />
-            <circle cx="85.5" cy="90" r="2.2" fill="#ffffff" />
-            <circle cx="89" cy="94" r="1" fill="#ffffff" />
-            {/* Eyelash accent */}
-            <path d="M80 90 Q87 85 94 90" stroke="#1f1614" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+            <ellipse cx="85" cy="91" rx="5.8" ry="4.8" fill="#1c120f" />
+            <circle cx="83.8" cy="89.5" r="1.6" fill="#ffffff" />
+            <circle cx="86.5" cy="92.5" r="0.8" fill="#ffffff" opacity="0.8" />
+            <path
+              d="M78 89.5 Q85 86 92 89.5"
+              stroke="#1b120f"
+              strokeWidth="1.5"
+              fill="none"
+              strokeLinecap="round"
+            />
 
             {/* Right Eye */}
-            <ellipse cx="113" cy="92" rx="6.5" ry="6.5" fill="#1f1614" />
-            <circle cx="111.5" cy="90" r="2.2" fill="#ffffff" />
-            <circle cx="115" cy="94" r="1" fill="#ffffff" />
-            {/* Eyelash accent */}
-            <path d="M106 90 Q113 85 120 90" stroke="#1f1614" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+            <ellipse cx="115" cy="91" rx="5.8" ry="4.8" fill="#1c120f" />
+            <circle cx="113.8" cy="89.5" r="1.6" fill="#ffffff" />
+            <circle cx="116.5" cy="92.5" r="0.8" fill="#ffffff" opacity="0.8" />
+            <path
+              d="M108 89.5 Q115 86 122 89.5"
+              stroke="#1b120f"
+              strokeWidth="1.5"
+              fill="none"
+              strokeLinecap="round"
+            />
           </g>
 
-          {/* Soft Nose */}
+          {/* Soft Natural Nose */}
           <path
-            d="M98 97 Q100 102 102 102"
-            stroke="#945738"
-            strokeWidth="1.5"
+            d="M98 94 Q100 101 102 101"
+            stroke="#b87b55"
+            strokeWidth="1.4"
             strokeLinecap="round"
             fill="none"
           />
 
-          {/* Warm Confident Smile */}
+          {/* Milu's Signature Radiant Smile Showing White Teeth */}
           {pose === 'celebrating' ? (
-            <path
-              d="M90 108 Q100 120 110 108 Z"
-              fill="#991b1b"
-              stroke="#1c1412"
-              strokeWidth="1.5"
-            />
-          ) : (
-            <>
+            <g>
               <path
-                d="M91 108 Q100 117 109 108"
-                stroke="#451a03"
-                strokeWidth="2.2"
+                d="M89 107 Q100 120 111 107 Z"
+                fill="#881337"
+                stroke="#3f140d"
+                strokeWidth="1.3"
+              />
+              <path
+                d="M91 107 Q100 114 109 107 Z"
+                fill="#ffffff"
+              />
+            </g>
+          ) : (
+            <g>
+              {/* Outer Smile Lip Contour */}
+              <path
+                d="M89 106 Q100 116 111 106"
+                stroke="#642416"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 fill="none"
               />
-              {/* Clean gentle smile teeth flash */}
+              {/* Clean White Upper Teeth Flash */}
               <path
-                d="M93 109 Q100 114 107 109 Z"
+                d="M91 106.8 Q100 112.5 109 106.8 Z"
                 fill="#ffffff"
-                opacity="0.9"
+                stroke="#e2e8f0"
+                strokeWidth="0.5"
               />
-            </>
+              {/* Lower Lip Subtle Warm Tone */}
+              <path
+                d="M93 113 Q100 116 107 113"
+                stroke="#be5a52"
+                strokeWidth="1"
+                fill="none"
+                opacity="0.7"
+              />
+            </g>
           )}
 
-          {/* Cheeks - Radiant subtle blush */}
-          <ellipse cx="78" cy="99" rx="4.5" ry="2.5" fill="#f43f5e" opacity="0.25" />
-          <ellipse cx="122" cy="99" rx="4.5" ry="2.5" fill="#f43f5e" opacity="0.25" />
+          {/* Gentle Natural Cheek Glow */}
+          <ellipse cx="77" cy="99" rx="4.5" ry="2.5" fill="#f43f5e" opacity="0.18" />
+          <ellipse cx="123" cy="99" rx="4.5" ry="2.5" fill="#f43f5e" opacity="0.18" />
 
-          {/* POSE-SPECIFIC ARMS AND PROPS */}
-
+          {/* POSES */}
           {/* 1. WAVE POSE */}
           {pose === 'wave' && (
             <>
-              {/* Left arm resting */}
               <path
                 d="M68 150 Q56 180 62 195"
                 stroke="#1e293b"
-                strokeWidth="14"
+                strokeWidth="13"
                 strokeLinecap="round"
                 fill="none"
               />
-              <circle cx="62" cy="198" r="6" fill="url(#skinGrad)" />
+              <circle cx="62" cy="198" r="5.5" fill="url(#skinGrad)" />
 
-              {/* Right arm waving in air */}
               <g className="animate-wave-arm">
                 <path
                   d="M132 150 Q150 135 158 115"
                   stroke="#1e293b"
-                  strokeWidth="14"
+                  strokeWidth="13"
                   strokeLinecap="round"
                   fill="none"
                 />
-                <circle cx="160" cy="110" r="7" fill="url(#skinGrad)" />
-                {/* Waving fingers */}
-                <circle cx="163" cy="106" r="2.5" fill="url(#skinGrad)" />
-                <circle cx="167" cy="109" r="2.5" fill="url(#skinGrad)" />
-
-                {/* Friendly wave sparkle */}
+                <circle cx="160" cy="110" r="6.5" fill="url(#skinGrad)" />
+                <circle cx="163" cy="106" r="2.2" fill="url(#skinGrad)" />
+                <circle cx="167" cy="109" r="2.2" fill="url(#skinGrad)" />
+                {/* Sparkle Wave Accent */}
                 <path
                   d="M172 98 L175 106 L183 108 L175 110 L172 118 L169 110 L161 108 L169 106 Z"
                   fill="#00e5ff"
@@ -346,10 +463,9 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
             </>
           )}
 
-          {/* 2. CODING POSE (with sleek mini laptop & code floaters) */}
+          {/* 2. CODING POSE */}
           {pose === 'coding' && (
             <g className="animate-prop">
-              {/* Left & Right arms reaching forward to type */}
               <path
                 d="M68 150 Q75 178 88 185"
                 stroke="#1e293b"
@@ -364,23 +480,17 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 strokeLinecap="round"
                 fill="none"
               />
+              <circle cx="88" cy="185" r="5.5" fill="url(#skinGrad)" className="animate-type" />
+              <circle cx="112" cy="185" r="5.5" fill="url(#skinGrad)" className="animate-type" />
 
-              {/* Typing hands */}
-              <circle cx="88" cy="185" r="6" fill="url(#skinGrad)" className="animate-type" />
-              <circle cx="112" cy="185" r="6" fill="url(#skinGrad)" className="animate-type" />
-
-              {/* Mini Futuristic Laptop */}
+              {/* Mini Laptop */}
               <polygon points="76,192 124,192 130,202 70,202" fill="#334155" stroke="#64748b" strokeWidth="1" />
-              {/* Screen Base & Glowing Screen */}
               <rect x="78" y="162" width="44" height="30" rx="3" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
               <rect x="81" y="165" width="38" height="24" rx="1.5" fill="#020617" />
-              {/* Glowing code lines on screen */}
               <line x1="84" y1="170" x2="105" y2="170" stroke="#00e5ff" strokeWidth="1.5" />
               <line x1="86" y1="175" x2="114" y2="175" stroke="#a78bfa" strokeWidth="1.2" />
               <line x1="86" y1="180" x2="98" y2="180" stroke="#38bdf8" strokeWidth="1.2" />
-
-              {/* Floating Glowing Code Particles */}
-              <text x="54" y="165" fill="#00e5ff" fontSize="12" fontFamily="monospace" fontWeight="bold" opacity="0.85">
+              <text x="54" y="165" fill="#00e5ff" fontSize="11" fontFamily="monospace" fontWeight="bold" opacity="0.85">
                 &lt;/&gt;
               </text>
               <text x="134" y="168" fill="#818cf8" fontSize="11" fontFamily="monospace" fontWeight="bold" opacity="0.85">
@@ -389,10 +499,9 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
             </g>
           )}
 
-          {/* 3. CERTIFICATE POSE (Holding gold honours certificate scroll) */}
+          {/* 3. CERTIFICATE POSE */}
           {pose === 'certificate' && (
             <g className="animate-prop">
-              {/* Arms holding scroll */}
               <path
                 d="M68 150 Q75 170 82 178"
                 stroke="#1e293b"
@@ -409,8 +518,6 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
               />
               <circle cx="82" cy="178" r="5" fill="url(#skinGrad)" />
               <circle cx="118" cy="178" r="5" fill="url(#skinGrad)" />
-
-              {/* Golden Diploma / Certificate Parchment */}
               <rect
                 x="74"
                 y="160"
@@ -421,13 +528,10 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 stroke="#d97706"
                 strokeWidth="2"
               />
-              {/* Golden Ribbon Seal */}
               <circle cx="100" cy="179" r="6" fill="url(#goldGrad)" />
               <path d="M98 184 L96 193 L100 190 L104 193 L102 184 Z" fill="#b45309" />
               <line x1="80" y1="168" x2="120" y2="168" stroke="#d97706" strokeWidth="1.5" />
               <line x1="84" y1="172" x2="116" y2="172" stroke="#d97706" strokeWidth="1" />
-
-              {/* Sparkles around certificate */}
               <path
                 d="M65 158 L67 163 L72 165 L67 167 L65 172 L63 167 L58 165 L63 163 Z"
                 fill="#fbbf24"
@@ -441,10 +545,9 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
             </g>
           )}
 
-          {/* 4. CARDORA PLANT POSE (Holding cardamom seedling) */}
+          {/* 4. CARDORA PLANT POSE */}
           {pose === 'cardora-plant' && (
             <g className="animate-prop">
-              {/* Hands cupping the plant */}
               <path
                 d="M68 150 Q80 178 92 182"
                 stroke="#1e293b"
@@ -461,11 +564,7 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
               />
               <circle cx="92" cy="182" r="5" fill="url(#skinGrad)" />
               <circle cx="108" cy="182" r="5" fill="url(#skinGrad)" />
-
-              {/* Tiny Terracotta Pot */}
               <polygon points="94,188 106,188 104,200 96,200" fill="#c2410c" stroke="#9a3412" strokeWidth="1" />
-
-              {/* Cardamom Sprout & Leaves */}
               <path
                 d="M100 188 Q100 172 100 164"
                 stroke="#15803d"
@@ -473,28 +572,22 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 strokeLinecap="round"
                 fill="none"
               />
-              {/* Left Leaf */}
               <path
                 d="M100 174 C90 170, 86 160, 94 156 C98 162, 100 168, 100 174 Z"
                 fill="url(#leafGrad)"
               />
-              {/* Right Leaf */}
               <path
                 d="M100 168 C110 164, 114 154, 106 150 C102 156, 100 162, 100 168 Z"
                 fill="url(#leafGrad)"
               />
-
-              {/* Floating Dewdrop Glow */}
               <circle cx="94" cy="158" r="2.2" fill="#38bdf8" opacity="0.9" />
-              {/* Agro-climatic telemetry aura */}
               <circle cx="100" cy="164" r="16" stroke="#4ade80" strokeWidth="1" strokeDasharray="2,2" opacity="0.5" />
             </g>
           )}
 
-          {/* 5. CELEBRATING POSE (Both arms up, star confetti) */}
+          {/* 5. CELEBRATING POSE */}
           {pose === 'celebrating' && (
             <>
-              {/* Left arm up */}
               <path
                 d="M68 150 Q52 130 50 108"
                 stroke="#1e293b"
@@ -502,9 +595,7 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 strokeLinecap="round"
                 fill="none"
               />
-              <circle cx="50" cy="106" r="6" fill="url(#skinGrad)" />
-
-              {/* Right arm up */}
+              <circle cx="50" cy="106" r="5.5" fill="url(#skinGrad)" />
               <path
                 d="M132 150 Q148 130 150 108"
                 stroke="#1e293b"
@@ -512,21 +603,15 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 strokeLinecap="round"
                 fill="none"
               />
-              <circle cx="150" cy="106" r="6" fill="url(#skinGrad)" />
-
-              {/* Celebration Confetti Stars */}
+              <circle cx="150" cy="106" r="5.5" fill="url(#skinGrad)" />
               <path d="M42 90 L45 96 L52 97 L46 101 L48 107 L42 103 L36 107 L38 101 L32 97 L39 96 Z" fill="#fbbf24" className="animate-star" />
               <path d="M158 90 L161 96 L168 97 L162 101 L164 107 L158 103 L152 107 L154 101 L148 97 L155 96 Z" fill="#00e5ff" className="animate-star" />
-              <circle cx="100" cy="40" r="3" fill="#ec4899" className="animate-star" />
-              <circle cx="75" cy="45" r="2.5" fill="#818cf8" className="animate-star" />
-              <circle cx="125" cy="45" r="2.5" fill="#10b981" className="animate-star" />
             </>
           )}
 
           {/* 6. POINTING POSE */}
           {pose === 'pointing' && (
             <>
-              {/* Left arm resting */}
               <path
                 d="M68 150 Q58 178 64 195"
                 stroke="#1e293b"
@@ -535,8 +620,6 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 fill="none"
               />
               <circle cx="64" cy="198" r="5.5" fill="url(#skinGrad)" />
-
-              {/* Right arm extended pointing right/down */}
               <path
                 d="M132 150 Q150 162 170 165"
                 stroke="#1e293b"
@@ -544,19 +627,15 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 strokeLinecap="round"
                 fill="none"
               />
-              {/* Hand with pointing index finger */}
               <circle cx="170" cy="165" r="5.5" fill="url(#skinGrad)" />
-              <line x1="170" y1="165" x2="182" y2="167" stroke="url(#skinGrad)" strokeWidth="3.5" strokeLinecap="round" />
-
-              {/* Target pulse circle */}
+              <line x1="170" y1="165" x2="182" y2="167" stroke="url(#skinGrad)" strokeWidth="3.2" strokeLinecap="round" />
               <circle cx="188" cy="168" r="4" fill="none" stroke="#00e5ff" strokeWidth="1.5" className="animate-star" />
             </>
           )}
 
-          {/* 7. CURIOUS POSE (Head tilted slightly, magnifying glass) */}
+          {/* 7. CURIOUS POSE */}
           {pose === 'curious' && (
             <g className="animate-prop">
-              {/* Left hand to chin */}
               <path
                 d="M68 150 Q80 140 88 122"
                 stroke="#1e293b"
@@ -565,8 +644,6 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 fill="none"
               />
               <circle cx="88" cy="120" r="5" fill="url(#skinGrad)" />
-
-              {/* Right hand holding magnifying glass */}
               <path
                 d="M132 150 Q145 160 142 175"
                 stroke="#1e293b"
@@ -575,18 +652,15 @@ export const MiluCharacter: React.FC<MiluCharacterProps> = ({
                 fill="none"
               />
               <circle cx="142" cy="177" r="5" fill="url(#skinGrad)" />
-
-              {/* Sleek magnifying glass */}
               <line x1="142" y1="177" x2="132" y2="167" stroke="#94a3b8" strokeWidth="3" strokeLinecap="round" />
               <circle cx="127" cy="162" r="9" fill="none" stroke="#00e5ff" strokeWidth="2" />
               <circle cx="127" cy="162" r="7" fill="#00e5ff" opacity="0.2" />
             </g>
           )}
 
-          {/* 8. DEFAULT / IDLE POSE */}
+          {/* 8. IDLE / JUMP POSE */}
           {(pose === 'idle' || pose === 'jump') && (
             <>
-              {/* Natural relaxed arms at sides */}
               <path
                 d="M68 150 Q56 182 62 200"
                 stroke="#1e293b"

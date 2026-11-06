@@ -105,8 +105,9 @@ export const CinematicPhotoReveal: React.FC<CinematicPhotoRevealProps> = ({ phot
             <MiluCharacter
               pose="celebrating"
               size="sm"
+              mode="photo"
               interactive={false}
-              className="w-14 h-18 drop-shadow-xl"
+              className="w-14 h-14 drop-shadow-xl"
             />
             {photo.mascotNote && (
               <div className="p-3 rounded-2xl bg-[#070d18]/95 border border-[#00e5ff]/40 shadow-xl backdrop-blur-md max-w-xs text-left animate-fadeIn pointer-events-auto">

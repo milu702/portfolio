@@ -85,7 +85,7 @@ export const AboutSection: React.FC = () => {
 
             {/* Overlapping Mascot Cameo Badge */}
             <div className="absolute -bottom-8 -right-4 sm:-right-8 rounded-2xl overflow-hidden border border-[#00e5ff]/30 shadow-2xl bg-[#070d18]/95 p-3 hidden sm:flex items-center gap-2.5 backdrop-blur-md">
-              <MiluCharacter pose="curious" size="sm" interactive={false} className="w-12 h-16" />
+              <MiluCharacter pose="curious" size="sm" mode="photo" interactive={false} className="w-12 h-12" />
               <div className="text-left pr-2">
                 <span className="text-[9px] uppercase font-mono-code text-[#00e5ff] tracking-wider font-bold block">
                   Curious Mind

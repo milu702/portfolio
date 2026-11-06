@@ -191,7 +191,7 @@ export const ContactSection: React.FC = () => {
 
             {submitted && (
               <div className="p-4 mb-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-4 text-emerald-300 text-xs font-mono-code">
-                <MiluCharacter pose="celebrating" size="sm" interactive={false} className="w-12 h-16 shrink-0" />
+                <MiluCharacter pose="celebrating" size="sm" mode="photo" interactive={false} className="w-12 h-12 shrink-0" />
                 <div>
                   <span className="font-bold text-emerald-400 block mb-1">🎉 Message Dispatch Initiated!</span>
                   <span>

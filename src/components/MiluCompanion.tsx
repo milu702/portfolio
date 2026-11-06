@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Volume2, VolumeX, ChevronDown, ExternalLink } from 'lucide-react';
+import { Sparkles, Volume2, VolumeX, ChevronDown, ExternalLink, User, Briefcase, Palette } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { MiluCharacter } from './MiluCharacter';
-import type { CharacterPose } from './MiluCharacter';
+import type { CharacterPose, CharacterMode } from './MiluCharacter';
 import { soundEngine } from '../utils/audio';
 
 interface MiluCompanionProps {
@@ -95,6 +95,8 @@ export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) =
   const [customQuoteIndex, setCustomQuoteIndex] = useState<number>(-1);
   const [isAudioOn, setIsAudioOn] = useState<boolean>(false);
   const [bounceActive, setBounceActive] = useState<boolean>(false);
+  // Default to Real Photo mode so the companion matches Milu authentically
+  const [avatarMode, setAvatarMode] = useState<CharacterMode>('photo');
 
   // Sync section dialogue
   const currentDialogue = sectionDialogues[activeSection] || sectionDialogues.hero;
@@ -149,9 +151,9 @@ export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) =
           {/* Top Companion Header */}
           <div className="flex items-center justify-between mb-2 pb-2 border-b border-white/[0.08]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#00e5ff] animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-[#10b981] animate-ping" />
               <span className="text-[11px] font-mono-code font-bold uppercase tracking-wider text-[#00e5ff]">
-                Milu's Mascot Companion
+                Milu Jiji · Digital Companion
               </span>
             </div>
 
@@ -204,6 +206,49 @@ export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) =
             </div>
           )}
 
+          {/* Avatar Mode Switcher Pills */}
+          <div className="mt-3 pt-2.5 border-t border-white/[0.08] flex items-center justify-between gap-1">
+            <span className="text-[10px] font-mono-code text-slate-400">View:</span>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setAvatarMode('photo')}
+                className={`px-2 py-0.5 rounded-full text-[10px] font-mono-code flex items-center gap-1 transition-all ${
+                  avatarMode === 'photo'
+                    ? 'bg-[#00e5ff] text-[#020408] font-bold shadow-sm'
+                    : 'bg-white/5 text-slate-400 hover:text-white'
+                }`}
+                title="Display real portrait in college uniform"
+              >
+                <User className="w-2.5 h-2.5" />
+                <span>Photo</span>
+              </button>
+              <button
+                onClick={() => setAvatarMode('photo-suit')}
+                className={`px-2 py-0.5 rounded-full text-[10px] font-mono-code flex items-center gap-1 transition-all ${
+                  avatarMode === 'photo-suit'
+                    ? 'bg-[#00e5ff] text-[#020408] font-bold shadow-sm'
+                    : 'bg-white/5 text-slate-400 hover:text-white'
+                }`}
+                title="Display real portrait in business suit"
+              >
+                <Briefcase className="w-2.5 h-2.5" />
+                <span>Suit</span>
+              </button>
+              <button
+                onClick={() => setAvatarMode('vector')}
+                className={`px-2 py-0.5 rounded-full text-[10px] font-mono-code flex items-center gap-1 transition-all ${
+                  avatarMode === 'vector'
+                    ? 'bg-[#00e5ff] text-[#020408] font-bold shadow-sm'
+                    : 'bg-white/5 text-slate-400 hover:text-white'
+                }`}
+                title="Display illustrated avatar likeness"
+              >
+                <Palette className="w-2.5 h-2.5" />
+                <span>Avatar</span>
+              </button>
+            </div>
+          </div>
+
           {/* Speech Bubble Arrow */}
           <div className="absolute -bottom-2 right-10 w-4 h-4 bg-[#070d18] border-r border-b border-[#00e5ff]/30 transform rotate-45" />
         </div>
@@ -219,7 +264,7 @@ export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) =
             if (isMinimized) setShowBubble(true);
           }}
           className="p-2 rounded-full bg-[#070d18]/90 hover:bg-[#070d18] border border-white/15 text-slate-400 hover:text-[#00e5ff] shadow-lg backdrop-blur-md transition-all hover:scale-110 mb-2"
-          title={isMinimized ? 'Wake Milu Mascot' : 'Minimize Mascot'}
+          title={isMinimized ? 'Expand Milu Companion' : 'Minimize Companion'}
           aria-label="Toggle mascot companion"
         >
           {isMinimized ? <Sparkles className="w-4 h-4 text-[#00e5ff]" /> : <ChevronDown className="w-4 h-4" />}
@@ -233,11 +278,17 @@ export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) =
               setIsMinimized(false);
               setShowBubble(true);
             }}
-            className="group relative p-2 rounded-2xl bg-[#070d18] border border-[#00e5ff]/40 shadow-xl hover:scale-105 transition-all flex items-center gap-2"
-            title="Expand Milu Mascot Companion"
+            className="group relative p-1.5 rounded-full bg-[#070d18] border border-[#00e5ff]/40 shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+            title="Expand Milu Digital Companion"
           >
-            <MiluCharacter pose="wave" size="sm" interactive={false} className="w-8 h-10" />
-            <span className="text-[11px] font-mono-code font-bold text-[#00e5ff] pr-1">Milu</span>
+            <MiluCharacter
+              pose="wave"
+              size="sm"
+              mode={avatarMode}
+              interactive={false}
+              className="w-10 h-10"
+            />
+            <span className="text-[11px] font-mono-code font-bold text-[#00e5ff] pr-2">Milu</span>
           </button>
         ) : (
           <div
@@ -245,15 +296,16 @@ export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) =
             className={`group cursor-pointer relative transition-transform duration-300 ${
               bounceActive ? 'animate-bounce' : 'hover:scale-105'
             }`}
-            title="Click me for a playful reaction or tip!"
+            title="Click me for tips, easter eggs and reactions!"
           >
             {/* Ambient Backlight Aura */}
             <div className="absolute inset-0 bg-[#00e5ff]/20 rounded-full blur-xl group-hover:bg-[#00e5ff]/35 transition-colors pointer-events-none" />
 
-            {/* Render Character with current section pose */}
+            {/* Render Character with current section pose & selected avatar mode */}
             <MiluCharacter
               pose={currentDialogue.pose}
-              size="md"
+              size={avatarMode === 'vector' ? 'md' : 'lg'}
+              mode={avatarMode}
               interactive={true}
               className="drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]"
             />
