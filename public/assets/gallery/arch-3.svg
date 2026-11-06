@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09142b" />
+      <stop offset="100%" stop-color="#020408" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" rx="24" fill="url(#bg3)" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+  
+  <text x="50" y="70" font-family="'Cinzel', Georgia, serif" font-size="24" font-weight="bold" fill="#ffffff">FULL-STACK CONCURRENCY &amp; API PIPELINE</text>
+  <text x="50" y="100" font-family="'JetBrains Mono', monospace" font-size="12" fill="#00e5ff">TURF BOOKING &amp; REST API SYSTEM ARCHITECTURE</text>
+
+  <!-- Layer 1: Client Tier -->
+  <rect x="50" y="160" width="200" height="180" rx="14" fill="#0c1d3d" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="75" y="200" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="bold" fill="#ffffff">Client Tier</text>
+  <text x="75" y="230" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">React.js Virtual DOM</text>
+  <text x="75" y="255" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">Interactive Slot Matrix</text>
+  <text x="75" y="280" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">Optimistic UI State</text>
+  <text x="75" y="310" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8">Async Fetch / Axios</text>
+
+  <!-- Layer 2: API Gateway -->
+  <rect x="300" y="160" width="200" height="180" rx="14" fill="#0c1d3d" stroke="#00e5ff" stroke-width="1.5" />
+  <text x="325" y="200" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="bold" fill="#ffffff">API Gateway</text>
+  <text x="325" y="230" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">Node / Express.js</text>
+  <text x="325" y="255" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">JWT Auth Middleware</text>
+  <text x="325" y="280" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">Postman Assertions</text>
+  <text x="325" y="310" font-family="'JetBrains Mono', monospace" font-size="11" fill="#00e5ff">Input Sanitization</text>
+
+  <!-- Layer 3: Database & Lock Engine -->
+  <rect x="550" y="160" width="200" height="180" rx="14" fill="#0c1d3d" stroke="#818cf8" stroke-width="1.5" />
+  <text x="575" y="200" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="bold" fill="#ffffff">Database Tier</text>
+  <text x="575" y="230" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">MySQL Relational</text>
+  <text x="575" y="255" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">ACID Transactions</text>
+  <text x="575" y="280" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">Row-Level Locks</text>
+  <text x="575" y="310" font-family="'JetBrains Mono', monospace" font-size="11" fill="#818cf8">Zero Collision State</text>
+
+  <!-- Connectors -->
+  <line x1="250" y1="250" x2="300" y2="250" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4 4" />
+  <line x1="500" y1="250" x2="550" y2="250" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4 4" />
+
+  <!-- Bottom Terminal Log Output -->
+  <rect x="50" y="390" width="700" height="150" rx="14" fill="#040812" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <text x="80" y="425" font-family="'JetBrains Mono', monospace" font-size="12" fill="#00e5ff">POST /api/v1/bookings/reserve HTTP/1.1</text>
+  <text x="80" y="455" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">Payload: { slotId: 'TURF-08-EVN', athleteId: 'USR-892', token: 'JWT_BEARER' }</text>
+  <text x="80" y="485" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8">Transaction: BEGIN; SELECT ... FOR UPDATE; INSERT INTO bookings ...; COMMIT;</text>
+  <text x="80" y="515" font-family="'JetBrains Mono', monospace" font-size="12" fill="#4ade80">HTTP 201 Created // Slot Locked Atomically</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" width="600" height="700">
+  <defs>
+    <linearGradient id="cyberBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070f24" />
+      <stop offset="60%" stop-color="#050a18" />
+      <stop offset="100%" stop-color="#020408" />
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <linearGradient id="neonViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.25" />
+      <stop offset="70%" stop-color="#00e5ff" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Canvas Card -->
+  <rect width="600" height="700" rx="32" fill="url(#cyberBg)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  
+  <!-- Glowing Field -->
+  <circle cx="300" cy="350" r="220" fill="url(#centerGlow)" />
+  
+  <!-- Grid Matrix -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <line x1="50" y1="150" x2="550" y2="150" />
+    <line x1="50" y1="250" x2="550" y2="250" />
+    <line x1="50" y1="350" x2="550" y2="350" />
+    <line x1="50" y1="450" x2="550" y2="450" />
+    <line x1="50" y1="550" x2="550" y2="550" />
+    <line x1="150" y1="50" x2="150" y2="650" />
+    <line x1="250" y1="50" x2="250" y2="650" />
+    <line x1="350" y1="50" x2="350" y2="650" />
+    <line x1="450" y1="50" x2="450" y2="650" />
+  </g>
+
+  <!-- Concentric Orbital Tech Rings -->
+  <circle cx="300" cy="330" r="180" fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1.5" stroke-dasharray="12 8" />
+  <circle cx="300" cy="330" r="140" fill="none" stroke="url(#neonCyan)" stroke-width="2" stroke-dasharray="30 10 5 10" opacity="0.8" />
+  <circle cx="300" cy="330" r="100" fill="none" stroke="url(#neonViolet)" stroke-width="1.5" />
+  
+  <!-- Central Monogram Icon -->
+  <polygon points="300,265 355,297 355,362 300,395 245,362 245,297" fill="#0b1736" stroke="#00e5ff" stroke-width="2.5" />
+  <text x="300" y="342" font-family="'Cinzel', Georgia, serif" font-size="44" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">MJ</text>
+  
+  <!-- Code Snippets in Background -->
+  <g font-family="'JetBrains Mono', monospace" font-size="12" fill="rgba(148, 163, 184, 0.6)">
+    <text x="60" y="90">const system = new ScalableArchitecture();</text>
+    <text x="60" y="115">system.deploy({ target: 'AWS', telemetry: true });</text>
+    <text x="60" y="600">// CARDORA CORE // RULE_ENGINE: ACTIVE</text>
+    <text x="60" y="625">return &lt;MiluJiji /&gt; // MCA SCHOLAR 2022-2027</text>
+  </g>
+
+  <!-- Technical Node Dots -->
+  <circle cx="150" cy="250" r="5" fill="#00e5ff" />
+  <circle cx="450" cy="250" r="5" fill="#818cf8" />
+  <circle cx="150" cy="450" r="5" fill="#38bdf8" />
+  <circle cx="450" cy="450" r="5" fill="#00e5ff" />
+  
+  <!-- Connecting Laser Vectors -->
+  <line x1="150" y1="250" x2="245" y2="297" stroke="#00e5ff" stroke-width="1.5" opacity="0.4" />
+  <line x1="450" y1="250" x2="355" y2="297" stroke="#818cf8" stroke-width="1.5" opacity="0.4" />
+  <line x1="150" y1="450" x2="245" y2="362" stroke="#38bdf8" stroke-width="1.5" opacity="0.4" />
+  <line x1="450" y1="450" x2="355" y2="362" stroke="#00e5ff" stroke-width="1.5" opacity="0.4" />
+  
+  <!-- Frame Tech Corners -->
+  <path d="M 30 70 L 30 30 L 70 30" fill="none" stroke="#00e5ff" stroke-width="2.5" />
+  <path d="M 530 30 L 570 30 L 570 70" fill="none" stroke="#00e5ff" stroke-width="2.5" />
+  <path d="M 30 630 L 30 670 L 70 670" fill="none" stroke="#00e5ff" stroke-width="2.5" />
+  <path d="M 530 670 L 570 670 L 570 630" fill="none" stroke="#00e5ff" stroke-width="2.5" />
+</svg>
