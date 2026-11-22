@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Download, ExternalLink, CheckCircle2, ShieldCheck, Award, Sparkles } from 'lucide-react';
+import { X, ExternalLink, CheckCircle2, ShieldCheck, Award, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { CertificateItem } from '../types';
 import { MiluCharacter } from './MiluCharacter';
@@ -157,28 +157,6 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Modal Footer Actions */}
-        <div className="p-4 sm:p-7 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-          <a
-            href={certificate.pdfPath}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] text-xs font-bold tracking-wider uppercase hover:shadow-[0_0_20px_rgba(2,132,199,0.3)] dark:hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all hover:scale-105 text-center"
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-            <span>Open Document Viewer</span>
-          </a>
-
-          <a
-            href={certificate.pdfPath}
-            download={`${certificate.title.replace(/[^a-zA-Z0-9]/g, '_')}${isImageBadge ? '.jpeg' : '.pdf'}`}
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-sm text-center"
-          >
-            <Download className="w-3.5 h-3.5 text-slate-600 dark:text-slate-300" />
-            <span>Download Asset</span>
-          </a>
         </div>
       </div>
     </div>
