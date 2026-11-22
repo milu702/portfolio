@@ -90,8 +90,18 @@ const funEasterEggQuotes = [
 ];
 
 export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) => {
-  const [isMinimized, setIsMinimized] = useState<boolean>(false);
-  const [showBubble, setShowBubble] = useState<boolean>(true);
+  const [isMinimized, setIsMinimized] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
+  const [showBubble, setShowBubble] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768;
+    }
+    return true;
+  });
   const [customQuoteIndex, setCustomQuoteIndex] = useState<number>(-1);
   const [isAudioOn, setIsAudioOn] = useState<boolean>(false);
   const [bounceActive, setBounceActive] = useState<boolean>(false);
@@ -101,14 +111,12 @@ export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) =
   // Sync section dialogue
   const currentDialogue = sectionDialogues[activeSection] || sectionDialogues.hero;
 
-  // Auto-show bubble with gentle animation on section change
+  // Auto-show bubble with gentle animation on section change (only on desktop by default)
   useEffect(() => {
-    setShowBubble(true);
+    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+      setShowBubble(true);
+    }
     setCustomQuoteIndex(-1);
-    const timer = setTimeout(() => {
-      // Keep visible without auto-dismissing unless user minimizes
-    }, 8000);
-    return () => clearTimeout(timer);
   }, [activeSection]);
 
   const handleCharacterClick = () => {
@@ -142,12 +150,12 @@ export const MiluCompanion: React.FC<MiluCompanionProps> = ({ activeSection }) =
 
   return (
     <aside
-      className="fixed bottom-5 right-5 z-40 flex flex-col items-end pointer-events-none select-none transition-all duration-300"
+      className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-40 flex flex-col items-end pointer-events-none select-none transition-all duration-300"
       aria-label="Interactive Portfolio Mascot Companion"
     >
       {/* Speech Dialogue Bubble */}
       {!isMinimized && showBubble && (
-        <div className="pointer-events-auto mb-3 max-w-xs sm:max-w-sm rounded-2xl bg-[#070d18]/95 border border-[#00e5ff]/30 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-fadeIn text-left relative">
+        <div className="pointer-events-auto mb-3 w-[calc(100vw-1.5rem)] sm:w-auto max-w-[calc(100vw-1.5rem)] sm:max-w-sm rounded-2xl bg-[#070d18]/95 border border-[#00e5ff]/30 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-fadeIn text-left relative">
           {/* Top Companion Header */}
           <div className="flex items-center justify-between mb-2 pb-2 border-b border-white/[0.08]">
             <div className="flex items-center gap-2">

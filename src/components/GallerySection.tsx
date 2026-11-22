@@ -76,7 +76,7 @@ export const GallerySection: React.FC = () => {
   };
 
   return (
-    <section id="gallery" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#030712] overflow-hidden">
+    <section id="gallery" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-[#030712] overflow-hidden transition-colors">
       {/* Background illumination */}
       <div className="absolute top-1/3 left-10 w-96 h-96 bg-[#818cf8]/5 rounded-full blur-[140px] pointer-events-none" />
 

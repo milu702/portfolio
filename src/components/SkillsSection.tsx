@@ -15,7 +15,7 @@ export const SkillsSection: React.FC = () => {
   const currentCategory = skillsData[activeCategoryIndex];
 
   return (
-    <section id="skills" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#020408] overflow-hidden">
+    <section id="skills" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-[#020408] overflow-hidden transition-colors">
       {/* Ambient background illumination */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#00e5ff]/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-[#818cf8]/5 rounded-full blur-[130px] pointer-events-none" />

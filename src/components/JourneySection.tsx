@@ -6,7 +6,7 @@ export const JourneySection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'both' | 'experience' | 'education'>('both');
 
   return (
-    <section id="journey" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#020408] overflow-hidden">
+    <section id="journey" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-[#020408] overflow-hidden transition-colors">
       {/* Background atmospheric gradient */}
       <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#818cf8]/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -27,7 +27,7 @@ export const JourneySection: React.FC = () => {
           </p>
 
           {/* Tab Filter */}
-          <div className="flex items-center gap-2 mt-8 p-1.5 rounded-2xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08]">
+          <div className="flex flex-wrap items-center gap-2 mt-8 p-1.5 rounded-2xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] w-full sm:w-auto">
             <button
               onClick={() => setActiveTab('both')}
               className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wider uppercase transition-all ${

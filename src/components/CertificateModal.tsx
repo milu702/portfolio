@@ -52,7 +52,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 lg:p-8 bg-[#020408]/92 backdrop-blur-2xl overflow-y-auto animate-fadeIn select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 lg:p-8 bg-[#020408]/92 backdrop-blur-2xl overflow-y-auto animate-fadeIn select-none"
       role="dialog"
       aria-modal="true"
       aria-label={certificate.title}
@@ -64,7 +64,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
         <div className="h-1.5 w-full bg-gradient-to-r from-[#0284c7] via-[#fbbf24] to-[#f59e0b] dark:from-[#00e5ff] dark:via-[#fbbf24] dark:to-[#f59e0b]" />
 
         {/* Modal Header with Mascot Cameo */}
-        <div className="p-5 sm:p-7 border-b border-slate-200 dark:border-white/10 flex items-start justify-between bg-slate-50 dark:bg-white/[0.02] shrink-0">
+        <div className="p-4 sm:p-7 border-b border-slate-200 dark:border-white/10 flex items-start justify-between bg-slate-50 dark:bg-white/[0.02] shrink-0">
           <div className="flex items-start gap-4">
             {/* Mascot celebrating the achievement */}
             <div className="hidden sm:block shrink-0 -mt-2">
@@ -81,7 +81,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
                   Verified Credential // {certificate.issueDate}
                 </span>
               </div>
-              <h3 className="font-cinzel text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
+              <h3 className="font-cinzel text-lg sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
                 {certificate.title}
               </h3>
               <p className="text-xs sm:text-sm font-space text-[#0284c7] dark:text-[#38bdf8] font-semibold mt-1">
@@ -92,7 +92,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
 
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors shrink-0 ml-4"
+            className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors shrink-0 ml-4 cursor-pointer"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
@@ -100,7 +100,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
         </div>
 
         {/* Modal Body */}
-        <div className="p-5 sm:p-7 space-y-6 overflow-y-auto">
+        <div className="p-4 sm:p-7 space-y-6 overflow-y-auto">
           {/* Visual preview for image badges (like Oracle AI badge) */}
           {isImageBadge && (
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 flex items-center justify-center">
@@ -160,12 +160,12 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
         </div>
 
         {/* Modal Footer Actions */}
-        <div className="p-5 sm:p-7 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] flex flex-wrap items-center gap-4 shrink-0">
+        <div className="p-4 sm:p-7 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
           <a
             href={certificate.pdfPath}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] text-xs font-bold tracking-wider uppercase hover:shadow-[0_0_20px_rgba(2,132,199,0.3)] dark:hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] text-xs font-bold tracking-wider uppercase hover:shadow-[0_0_20px_rgba(2,132,199,0.3)] dark:hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all hover:scale-105 text-center"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             <span>Open Document Viewer</span>
@@ -174,7 +174,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({ certificate,
           <a
             href={certificate.pdfPath}
             download={`${certificate.title.replace(/[^a-zA-Z0-9]/g, '_')}${isImageBadge ? '.jpeg' : '.pdf'}`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-sm"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-sm text-center"
           >
             <Download className="w-3.5 h-3.5 text-slate-600 dark:text-slate-300" />
             <span>Download Asset</span>

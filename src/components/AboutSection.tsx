@@ -181,7 +181,7 @@ export const AboutSection: React.FC = () => {
   };
 
   return (
-    <section id="about" className="relative py-28 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-50/50 dark:bg-[#030712]">
+    <section id="about" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-50 dark:bg-[#030712] transition-colors">
       {/* Ambient background glow accents */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#00e5ff]/5 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#818cf8]/5 rounded-full blur-[130px] pointer-events-none" />
@@ -265,7 +265,7 @@ export const AboutSection: React.FC = () => {
             {/* Floating Quote Stamp with Live Writing / Typewriter Animation */}
             <div
               onClick={startCreedTyping}
-              className="absolute -top-6 -left-4 sm:-left-6 p-4 rounded-2xl bg-white dark:bg-[#070d18] border border-slate-200 dark:border-[#00e5ff]/40 shadow-xl backdrop-blur-md max-w-[250px] cursor-pointer group transition-all duration-300 hover:scale-105 select-none"
+              className="absolute -top-4 left-2 sm:-top-6 sm:-left-6 p-3 sm:p-4 rounded-2xl bg-white dark:bg-[#070d18] border border-slate-200 dark:border-[#00e5ff]/40 shadow-xl backdrop-blur-md max-w-[210px] sm:max-w-[250px] cursor-pointer group transition-all duration-300 hover:scale-105 select-none"
               title="Click to replay writing animation"
             >
               <div className="flex items-center justify-between text-[#0284c7] dark:text-[#00e5ff] mb-1.5 pb-1 border-b border-slate-200 dark:border-white/[0.08]">

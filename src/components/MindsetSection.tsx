@@ -87,7 +87,7 @@ export const MindsetSection: React.FC = () => {
   const ActiveIcon = activePillar.icon;
 
   return (
-    <section id="mindset" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#020408] overflow-hidden">
+    <section id="mindset" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-[#020408] overflow-hidden transition-colors">
       {/* Ambient background light */}
       <div className="absolute top-1/2 left-1/3 w-[600px] h-[600px] bg-[#00e5ff]/5 rounded-full blur-[160px] pointer-events-none" />
 

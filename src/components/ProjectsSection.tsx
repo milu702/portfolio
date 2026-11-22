@@ -73,7 +73,7 @@ export const ProjectsSection: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#030712] overflow-hidden">
+    <section id="projects" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-[#030712] overflow-hidden transition-colors">
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#00e5ff]/5 rounded-full blur-[160px] pointer-events-none" />
 
@@ -197,12 +197,12 @@ export const ProjectsSection: React.FC = () => {
               </div>
 
               {/* Flagship CTAs */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2 w-full sm:w-auto">
                 <a
                   href={flagshipProject.liveUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] text-xs font-bold tracking-wider uppercase hover:shadow-[0_0_25px_rgba(0,229,255,0.4)] transition-all hover:scale-105"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] text-xs font-bold tracking-wider uppercase hover:shadow-[0_0_25px_rgba(0,229,255,0.4)] transition-all hover:scale-105 w-full sm:w-auto text-center"
                 >
                   <span>Launch Live Platform</span>
                   <ExternalLink className="w-4 h-4" />
@@ -210,7 +210,7 @@ export const ProjectsSection: React.FC = () => {
 
                 <button
                   onClick={() => handleOpenProject(flagshipProject)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs font-semibold tracking-wider uppercase backdrop-blur-md transition-all hover:scale-105"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs font-semibold tracking-wider uppercase backdrop-blur-md transition-all hover:scale-105 w-full sm:w-auto text-center cursor-pointer"
                 >
                   <Layers className="w-4 h-4 text-[#0284c7] dark:text-[#00e5ff]" />
                   <span>View Full Case Study</span>

@@ -189,12 +189,12 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Status Capsule */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.1] backdrop-blur-md mb-6 shadow-sm dark:shadow-lg dark:shadow-black/40">
+          <div className="flex flex-wrap items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-2xl sm:rounded-full bg-white/90 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.1] backdrop-blur-md mb-6 shadow-sm dark:shadow-lg dark:shadow-black/40">
             <span className="w-2 h-2 rounded-full bg-[#0284c7] dark:bg-[#00e5ff] animate-pulse" />
             <span className="text-xs font-mono-code font-medium text-slate-700 dark:text-slate-300 tracking-wider uppercase">
               Integrated MCA Scholar · Amal Jyothi Autonomous
             </span>
-            <span className="text-slate-400 dark:text-slate-600">|</span>
+            <span className="hidden sm:inline text-slate-400 dark:text-slate-600">|</span>
             <span className="text-xs font-mono-code text-[#0284c7] dark:text-[#00e5ff] flex items-center gap-1 font-semibold">
               <MapPin className="w-3 h-3" />
               Kattappana, Kerala
@@ -202,13 +202,13 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Oversized Cinematic Typography Name */}
-          <h1 className="font-cinzel text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black gradient-text-hero tracking-tight leading-[1.05] mb-4">
+          <h1 className="font-cinzel text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-black gradient-text-hero tracking-tight leading-[1.05] mb-4">
             MILU JIJI
           </h1>
 
           {/* Sub-headline & Vision Statement */}
-          <div className="relative pl-5 border-l-2 border-[#0284c7] dark:border-[#00e5ff] mb-6">
-            <p className="font-space text-xl sm:text-2xl lg:text-3xl font-medium text-slate-900 dark:text-white tracking-wide">
+          <div className="relative pl-4 sm:pl-5 border-l-2 border-[#0284c7] dark:border-[#00e5ff] mb-6">
+            <p className="font-space text-lg sm:text-2xl lg:text-3xl font-medium text-slate-900 dark:text-white tracking-wide">
               {personalInfo.tagline}
             </p>
             <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 font-jakarta max-w-2xl leading-relaxed">
@@ -222,38 +222,38 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Metric Highlights Pill Row */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-xl mb-8">
-            <div className="p-3 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm">
-              <div className="font-mono-code text-lg sm:text-2xl font-bold text-[#0284c7] dark:text-[#00e5ff]">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full max-w-xl mb-8">
+            <div className="p-2.5 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm text-center sm:text-left">
+              <div className="font-mono-code text-base sm:text-2xl font-bold text-[#0284c7] dark:text-[#00e5ff]">
                 Rank 1 & 2
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
+              <div className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
                 Semester Top Ranker
               </div>
             </div>
-            <div className="p-3 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm">
-              <div className="font-mono-code text-lg sm:text-2xl font-bold text-slate-900 dark:text-white">
+            <div className="p-2.5 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm text-center sm:text-left">
+              <div className="font-mono-code text-base sm:text-2xl font-bold text-slate-900 dark:text-white">
                 Full-Stack
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
+              <div className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
                 React · Node · Python
               </div>
             </div>
-            <div className="p-3 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm">
-              <div className="font-mono-code text-lg sm:text-2xl font-bold text-indigo-600 dark:text-[#818cf8]">
+            <div className="p-2.5 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm text-center sm:text-left">
+              <div className="font-mono-code text-base sm:text-2xl font-bold text-indigo-600 dark:text-[#818cf8]">
                 2022–2027
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
+              <div className="text-[10px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
                 Integrated MCA Batch
               </div>
             </div>
           </div>
 
           {/* CTA Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 w-full sm:w-auto">
             <a
               href="#about"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] text-sm font-bold tracking-wider uppercase hover:shadow-[0_0_30px_rgba(2,132,199,0.3)] dark:hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] text-xs sm:text-sm font-bold tracking-wider uppercase hover:shadow-[0_0_30px_rgba(2,132,199,0.3)] dark:hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] transition-all duration-300 hover:scale-105 w-full sm:w-auto"
             >
               <Sparkles className="w-4 h-4 text-white dark:text-[#020408]" />
               <span>Explore My World</span>
@@ -261,7 +261,7 @@ export const HeroSection: React.FC = () => {
 
             <a
               href="#projects"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] border border-slate-300 dark:border-white/10 hover:border-[#0284c7]/50 dark:hover:border-[#00e5ff]/50 text-slate-900 dark:text-white text-sm font-semibold tracking-wider uppercase backdrop-blur-md transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] border border-slate-300 dark:border-white/10 hover:border-[#0284c7]/50 dark:hover:border-[#00e5ff]/50 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold tracking-wider uppercase backdrop-blur-md transition-all duration-300 w-full sm:w-auto"
             >
               <Layers className="w-4 h-4 text-[#0284c7] dark:text-[#00e5ff]" />
               <span>View Projects</span>
@@ -270,7 +270,7 @@ export const HeroSection: React.FC = () => {
             <a
               href={personalInfo.resumePdf}
               download="Milu_Jiji_Resume.pdf"
-              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.03] dark:hover:bg-white/[0.08] border border-slate-300 dark:border-white/10 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-sm font-medium tracking-wider uppercase transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.03] dark:hover:bg-white/[0.08] border border-slate-300 dark:border-white/10 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-xs sm:text-sm font-medium tracking-wider uppercase transition-all duration-300 flex-1 sm:flex-initial"
             >
               <Download className="w-4 h-4 text-slate-500 dark:text-slate-400" />
               <span>Resume</span>
@@ -278,7 +278,7 @@ export const HeroSection: React.FC = () => {
 
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-transparent hover:bg-slate-100 dark:hover:bg-white/[0.05] border border-slate-300 dark:border-white/10 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-sm font-medium tracking-wider uppercase transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-transparent hover:bg-slate-100 dark:hover:bg-white/[0.05] border border-slate-300 dark:border-white/10 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-xs sm:text-sm font-medium tracking-wider uppercase transition-all duration-300 flex-1 sm:flex-initial"
             >
               <Send className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
               <span>Contact</span>
@@ -287,10 +287,10 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Right Column: Actual Portrait Revealed with Mask & Depth (5 cols) */}
-        <div className="lg:col-span-5 flex justify-center items-center order-1 lg:order-2">
+        <div className="lg:col-span-5 flex justify-center items-center order-1 lg:order-2 my-2 lg:my-0">
           <div
             onClick={handlePortraitClick}
-            className="relative w-full max-w-md aspect-[4/5] group perspective-1000 cursor-pointer"
+            className="relative w-full max-w-[280px] sm:max-w-md aspect-[4/5] group perspective-1000 cursor-pointer"
             title="Click to reveal photograph in interactive cinematic viewer"
           >
             {/* Ambient Background Aura behind Portrait */}

@@ -123,7 +123,7 @@ export const ContactSection: React.FC = () => {
   )}`;
 
   return (
-    <section id="contact" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-[#030712] overflow-hidden transition-colors">
+    <section id="contact" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-[#030712] overflow-hidden transition-colors">
       {/* Background illumination */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#0284c7]/5 dark:bg-[#00e5ff]/5 rounded-full blur-[160px] pointer-events-none" />
 

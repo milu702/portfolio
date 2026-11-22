@@ -74,8 +74,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'py-3 bg-[#020408]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_rgba(0,0,0,0.8)]'
-            : 'py-6 bg-transparent'
+            ? 'py-3 bg-white/95 dark:bg-[#020408]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-sm dark:shadow-[0_10px_30px_rgba(0,0,0,0.8)]'
+            : 'py-4 sm:py-6 bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -85,18 +85,18 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
             className="group flex items-center gap-3 cursor-pointer select-none"
             aria-label="Milu Jiji Home"
           >
-            <div className="relative w-9 h-9 rounded-lg bg-gradient-to-br from-[#00e5ff]/20 to-[#818cf8]/20 border border-white/10 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105 group-hover:border-[#00e5ff]/40">
-              <span className="font-cinzel text-sm font-black text-white tracking-wider">MJ</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00e5ff]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <div className="relative w-9 h-9 rounded-lg bg-gradient-to-br from-[#0284c7]/20 to-[#818cf8]/20 dark:from-[#00e5ff]/20 dark:to-[#818cf8]/20 border border-slate-300 dark:border-white/10 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0284c7]/40 dark:group-hover:border-[#00e5ff]/40">
+              <span className="font-cinzel text-sm font-black text-slate-900 dark:text-white tracking-wider">MJ</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0284c7]/20 dark:via-[#00e5ff]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className="font-cinzel text-sm font-bold tracking-[0.2em] text-white uppercase group-hover:text-[#00e5ff] transition-colors">
+                <span className="font-cinzel text-sm font-bold tracking-[0.2em] text-slate-900 dark:text-white uppercase group-hover:text-[#0284c7] dark:group-hover:text-[#00e5ff] transition-colors">
                   Milu Jiji
                 </span>
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#10b981] animate-ping" />
               </div>
-              <span className="text-[10px] tracking-widest uppercase text-slate-400 font-mono-code">
+              <span className="text-[10px] tracking-widest uppercase text-slate-500 dark:text-slate-400 font-mono-code">
                 Integrated MCA · AJCE
               </span>
             </div>
@@ -180,7 +180,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
-              className="xl:hidden p-2 rounded-lg bg-white/[0.04] border border-white/10 text-slate-300 hover:text-white"
+              className="xl:hidden p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -191,16 +191,16 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 xl:hidden bg-[#020408]/95 backdrop-blur-2xl flex flex-col pt-24 px-6 pb-8 border-b border-white/10 animate-fadeIn">
+        <div className="fixed inset-0 z-40 xl:hidden bg-white/98 dark:bg-[#020408]/98 backdrop-blur-2xl flex flex-col pt-20 px-6 pb-8 border-b border-slate-200 dark:border-white/10 animate-fadeIn overflow-y-auto">
           {/* Quick Controls in Mobile Drawer */}
-          <div className="flex items-center justify-between p-3 mb-4 rounded-xl bg-white/[0.04] border border-white/10">
-            <span className="text-xs font-mono-code text-slate-300">Theme</span>
+          <div className="flex items-center justify-between p-3.5 mb-4 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10">
+            <span className="text-xs font-mono-code font-bold text-slate-700 dark:text-slate-300">Theme</span>
             <button
               onClick={() => {
                 soundEngine.playPop();
                 toggleTheme();
               }}
-              className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-mono-code font-bold text-white hover:bg-white/20 transition-all"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-white/10 text-xs font-mono-code font-bold text-slate-900 dark:text-white border border-slate-200 dark:border-transparent hover:bg-slate-50 dark:hover:bg-white/20 transition-all shadow-sm"
             >
               {theme === 'dark' ? (
                 <>
@@ -216,32 +216,32 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
             </button>
           </div>
 
-          <div className="flex flex-col gap-2 overflow-y-auto">
+          <div className="flex flex-col gap-1 overflow-y-auto">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-3 px-4 text-base font-medium tracking-wider uppercase text-slate-300 hover:text-[#00e5ff] hover:bg-white/[0.04] rounded-lg transition-colors border-b border-white/[0.04]"
+                className="py-3 px-4 min-h-[44px] flex items-center text-sm font-semibold tracking-wider uppercase text-slate-800 dark:text-slate-200 hover:text-[#0284c7] dark:hover:text-[#00e5ff] hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-xl transition-colors border-b border-slate-100 dark:border-white/[0.04]"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          <div className="mt-auto pt-6 flex flex-col gap-3 border-t border-white/10">
+          <div className="mt-auto pt-6 flex flex-col gap-3 border-t border-slate-200 dark:border-white/10">
             <a
               href={personalInfo.resumePdf}
               download="Milu_Jiji_Resume.pdf"
-              className="w-full py-3 rounded-xl bg-white/[0.06] border border-white/10 text-center text-sm font-semibold tracking-wider uppercase text-white flex items-center justify-center gap-2"
+              className="w-full py-3.5 min-h-[48px] rounded-xl bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 text-center text-sm font-semibold tracking-wider uppercase text-slate-900 dark:text-white flex items-center justify-center gap-2 transition-colors"
             >
-              <Download className="w-4 h-4 text-[#00e5ff]" />
+              <Download className="w-4 h-4 text-[#0284c7] dark:text-[#00e5ff]" />
               Download Resume
             </a>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-center text-sm font-bold tracking-wider uppercase text-[#020408]"
+              className="w-full py-3.5 min-h-[48px] rounded-xl bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-center text-sm font-bold tracking-wider uppercase text-white dark:text-[#020408] flex items-center justify-center transition-all"
             >
               Get in Touch
             </a>
