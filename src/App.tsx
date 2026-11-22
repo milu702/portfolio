@@ -88,7 +88,7 @@ export function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#020408] text-slate-100 selection:bg-[#00e5ff]/20 selection:text-[#00e5ff] overflow-x-hidden film-grain">
+    <div className="relative min-h-screen bg-[var(--bg-deep)] text-[var(--text-primary)] selection:bg-[#00e5ff]/20 selection:text-[#00e5ff] overflow-x-hidden film-grain transition-colors duration-300">
       {/* Top Floating Glass Navigation */}
       <Navigation activeSection={activeSection} />
 

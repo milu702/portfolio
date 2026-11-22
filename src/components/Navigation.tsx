@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Download, Volume2, VolumeX, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Download, Volume2, VolumeX, ArrowUpRight, Sun, Moon } from 'lucide-react';
 import { personalInfo } from '../data/personal';
 import { soundEngine } from '../utils/audio';
+import { useTheme } from '../context/ThemeContext';
 
 interface NavigationProps {
   activeSection: string;
@@ -12,6 +13,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [audioCtx, setAudioCtx] = useState<AudioContext | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,7 +94,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
                 <span className="font-cinzel text-sm font-bold tracking-[0.2em] text-white uppercase group-hover:text-[#00e5ff] transition-colors">
                   Milu Jiji
                 </span>
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#00e5ff] animate-ping" />
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#10b981] animate-ping" />
               </div>
               <span className="text-[10px] tracking-widest uppercase text-slate-400 font-mono-code">
                 Integrated MCA · AJCE
@@ -110,7 +112,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
                   href={link.href}
                   className={`px-3 py-1 text-xs font-medium tracking-wider uppercase transition-all duration-200 rounded-full ${
                     isActive
-                      ? 'text-[#00e5ff] bg-[#00e5ff]/10 border border-[#00e5ff]/20 shadow-[0_0_12px_rgba(0,229,255,0.2)]'
+                      ? 'text-[#00e5ff] bg-[#00e5ff]/10 border border-[#00e5ff]/20 shadow-[0_0_12px_rgba(0,229,255,0.2)] font-semibold'
                       : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
                   }`}
                 >
@@ -120,8 +122,26 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
             })}
           </nav>
 
-          {/* Actions: Audio, Resume, Contact & Mobile Menu */}
-          <div className="flex items-center gap-3">
+          {/* Actions: Theme Toggle, Audio, Resume, Contact & Mobile Menu */}
+          <div className="flex items-center gap-2.5">
+            {/* Theme Toggle (Light / Dark) */}
+            <button
+              onClick={() => {
+                soundEngine.playPop();
+                toggleTheme();
+              }}
+              type="button"
+              className="p-2 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-[#00e5ff] transition-all hover:scale-105 shadow-sm"
+              title={theme === 'dark' ? 'Switch to Light Theme (White)' : 'Switch to Dark Theme (Black)'}
+              aria-label="Toggle light/dark theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 hover:rotate-45" />
+              ) : (
+                <Moon className="w-4 h-4 text-indigo-600 transition-transform duration-300 hover:-rotate-12" />
+              )}
+            </button>
+
             {/* Ambient Sound Atmosphere */}
             <button
               onClick={toggleSound}
@@ -150,7 +170,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
             {/* Direct Connect CTA */}
             <a
               href="#contact"
-              className="hidden lg:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#020408] hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all duration-300 hover:scale-105"
+              className="hidden lg:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#020408] hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all duration-300 hover:scale-105 font-bold"
             >
               <span>Connect</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -172,6 +192,30 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 xl:hidden bg-[#020408]/95 backdrop-blur-2xl flex flex-col pt-24 px-6 pb-8 border-b border-white/10 animate-fadeIn">
+          {/* Quick Controls in Mobile Drawer */}
+          <div className="flex items-center justify-between p-3 mb-4 rounded-xl bg-white/[0.04] border border-white/10">
+            <span className="text-xs font-mono-code text-slate-300">Theme</span>
+            <button
+              onClick={() => {
+                soundEngine.playPop();
+                toggleTheme();
+              }}
+              className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-mono-code font-bold text-white hover:bg-white/20 transition-all"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>Dark Mode</span>
+                </>
+              )}
+            </button>
+          </div>
+
           <div className="flex flex-col gap-2 overflow-y-auto">
             {navLinks.map((link) => (
               <a

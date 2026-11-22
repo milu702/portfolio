@@ -35,16 +35,16 @@ export const CertificatesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col items-start mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff]" />
-            <span className="text-xs font-mono-code font-semibold tracking-[0.2em] uppercase text-slate-300">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] dark:bg-[#00e5ff]" />
+            <span className="text-xs font-mono-code font-semibold tracking-[0.2em] uppercase text-slate-600 dark:text-slate-300">
               06 // ACCREDITED CREDENTIALS & HONOURS
             </span>
           </div>
-          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
-            Certified <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#00e5ff] to-cyan-300">Archive</span>
+          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Certified <span className="gradient-text-cyan">Archive</span>
           </h2>
-          <p className="mt-3 text-lg text-slate-400 font-jakarta max-w-2xl">
+          <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 font-jakarta max-w-2xl">
             Official verifiable accreditations across Academic Honours, Cloud Architectures, Artificial Intelligence, Agile Delivery, and Software Engineering.
           </p>
 
@@ -59,16 +59,16 @@ export const CertificatesSection: React.FC = () => {
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wider uppercase transition-all border flex items-center gap-1.5 ${
                     activeCategory === cat
-                      ? 'bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#020408] border-transparent font-bold shadow-md shadow-[#00e5ff]/20'
-                      : 'bg-white/[0.02] border-white/[0.08] text-slate-400 hover:text-white hover:bg-white/[0.05]'
+                      ? 'bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] border-transparent font-bold shadow-md shadow-[#0284c7]/20 dark:shadow-[#00e5ff]/20'
+                      : 'bg-white dark:bg-white/[0.02] border-slate-200 dark:border-white/[0.08] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.05]'
                   }`}
                 >
                   <span>{cat}</span>
                   <span
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono-code ${
                       activeCategory === cat
-                        ? 'bg-[#020408]/20 text-[#020408]'
-                        : 'bg-white/10 text-slate-300'
+                        ? 'bg-white/30 dark:bg-[#020408]/20 text-white dark:text-[#020408] font-bold'
+                        : 'bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     {count}
@@ -85,7 +85,7 @@ export const CertificatesSection: React.FC = () => {
             <div
               key={cert.id}
               onClick={() => setSelectedCert(cert)}
-              className="group p-6 sm:p-7 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.08] hover:border-[#00e5ff]/40 shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden"
+              className="group p-6 sm:p-7 rounded-2xl bg-white dark:bg-white/[0.02] hover:bg-slate-50 dark:hover:bg-white/[0.05] border border-slate-200 dark:border-white/[0.08] hover:border-[#0284c7]/40 dark:hover:border-[#00e5ff]/40 shadow-md dark:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden"
             >
               {/* Top ambient glow for Academic Honours */}
               {cert.category === 'Academic Honours' && (
@@ -97,34 +97,34 @@ export const CertificatesSection: React.FC = () => {
                   <div
                     className={`p-2.5 rounded-xl border group-hover:scale-105 transition-transform ${
                       cert.category === 'Academic Honours'
-                        ? 'bg-amber-400/15 text-amber-300 border-amber-400/30'
-                        : 'bg-[#00e5ff]/10 text-[#00e5ff] border-[#00e5ff]/20'
+                        ? 'bg-amber-400/15 text-amber-700 dark:text-amber-300 border-amber-400/30'
+                        : 'bg-[#00e5ff]/15 dark:bg-[#00e5ff]/10 text-[#0284c7] dark:text-[#00e5ff] border-[#0284c7]/30 dark:border-[#00e5ff]/20'
                     }`}
                   >
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div className="flex items-center gap-2">
                     {cert.verificationUrl && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-mono-code font-bold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                        <span className="w-1 h-1 rounded-full bg-emerald-400" />
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-mono-code font-bold uppercase bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                        <span className="w-1 h-1 rounded-full bg-emerald-500" />
                         Verified
                       </span>
                     )}
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono-code font-bold uppercase tracking-wider bg-white/[0.05] text-[#00e5ff] border border-white/10">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono-code font-bold uppercase tracking-wider bg-slate-100 dark:bg-white/[0.05] text-[#0284c7] dark:text-[#00e5ff] border border-slate-200 dark:border-white/10">
                       {cert.category}
                     </span>
                   </div>
                 </div>
 
-                <h3 className="font-space text-base sm:text-lg font-bold text-white group-hover:text-[#00e5ff] transition-colors leading-snug">
+                <h3 className="font-space text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#0284c7] dark:group-hover:text-[#00e5ff] transition-colors leading-snug">
                   {cert.title}
                 </h3>
 
-                <p className="text-xs font-mono-code text-slate-400 mt-1">
-                  Issued by <span className="text-white font-medium">{cert.issuer}</span> · <span className="text-[#38bdf8]">{cert.issueDate}</span>
+                <p className="text-xs font-mono-code text-slate-600 dark:text-slate-400 mt-1">
+                  Issued by <span className="text-slate-900 dark:text-white font-medium">{cert.issuer}</span> · <span className="text-[#0284c7] dark:text-[#38bdf8] font-semibold">{cert.issueDate}</span>
                 </p>
 
-                <p className="text-xs text-slate-300 font-jakarta mt-3 line-clamp-3 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 font-jakarta mt-3 line-clamp-3 leading-relaxed">
                   {cert.summary}
                 </p>
 
@@ -133,29 +133,29 @@ export const CertificatesSection: React.FC = () => {
                   {cert.skillsCovered.slice(0, 3).map((s, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-0.5 rounded text-[10px] font-mono-code bg-white/[0.03] text-slate-400 border border-white/[0.06]"
+                      className="px-2 py-0.5 rounded text-[10px] font-mono-code bg-slate-100 dark:bg-white/[0.03] text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-white/[0.06]"
                     >
                       {s}
                     </span>
                   ))}
                   {cert.skillsCovered.length > 3 && (
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-mono-code bg-white/[0.02] text-slate-500">
+                    <span className="px-1.5 py-0.5 rounded text-[10px] font-mono-code bg-slate-100 dark:bg-white/[0.02] text-slate-500">
                       +{cert.skillsCovered.length - 3}
                     </span>
                   )}
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono-code text-[#00e5ff]">
+              <div className="mt-6 pt-4 border-t border-slate-200 dark:border-white/[0.06] flex items-center justify-between text-xs font-mono-code text-[#0284c7] dark:text-[#00e5ff]">
                 <span className="group-hover:underline">View Credential Details</span>
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </div>
             </div>
           ))}
         </div>
 
         {/* Institutional Verification Banner */}
-        <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-white/[0.03] via-white/[0.05] to-white/[0.02] border border-white/10 backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-gradient-to-r dark:from-white/[0.03] dark:via-white/[0.05] dark:to-white/[0.02] border border-slate-200 dark:border-white/10 backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
           <div className="text-left">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />

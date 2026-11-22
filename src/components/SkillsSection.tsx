@@ -23,16 +23,16 @@ export const SkillsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col items-start mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff]" />
-            <span className="text-xs font-mono-code font-semibold tracking-[0.2em] uppercase text-slate-300">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] dark:bg-[#00e5ff]" />
+            <span className="text-xs font-mono-code font-semibold tracking-[0.2em] uppercase text-slate-600 dark:text-slate-300">
               02 // TECHNICAL LANDSCAPE
             </span>
           </div>
-          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
-            Mindset & <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#00e5ff] to-cyan-300">Technical Craft</span>
+          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Mindset & <span className="gradient-text-cyan">Technical Craft</span>
           </h2>
-          <p className="mt-3 text-lg text-slate-400 font-jakarta max-w-2xl">
+          <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 font-jakarta max-w-2xl">
             A verified inventory of programming languages, architectures, frameworks, and tools applied in real academic research, industry internships, and production deployments.
           </p>
         </div>
@@ -51,13 +51,13 @@ export const SkillsSection: React.FC = () => {
                 }}
                 className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold tracking-wider whitespace-nowrap transition-all duration-300 border ${
                   isActive
-                    ? 'bg-[#00e5ff]/15 border-[#00e5ff] text-white shadow-[0_0_20px_rgba(0,229,255,0.2)]'
-                    : 'bg-white/[0.02] border-white/[0.07] text-slate-400 hover:text-white hover:bg-white/[0.05]'
+                    ? 'bg-slate-200 dark:bg-[#00e5ff]/15 border-[#0284c7] dark:border-[#00e5ff] text-slate-900 dark:text-white shadow-[0_0_20px_rgba(0,229,255,0.2)]'
+                    : 'bg-white dark:bg-white/[0.02] border-slate-200 dark:border-white/[0.07] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.05]'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#00e5ff]' : 'text-slate-400'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-[#0284c7] dark:text-[#00e5ff]' : 'text-slate-500 dark:text-slate-400'}`} />
                 <span>{cat.title}</span>
-                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-white/10 font-mono-code">
+                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 font-mono-code">
                   {cat.skills.length}
                 </span>
               </button>
@@ -77,27 +77,27 @@ export const SkillsSection: React.FC = () => {
                   onClick={() => setSelectedSkill(isSelected ? null : skill.name)}
                   className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer text-left relative group ${
                     isSelected
-                      ? 'bg-[#0b172a] border-[#00e5ff] shadow-[0_0_25px_rgba(0,229,255,0.15)] ring-1 ring-[#00e5ff]/50'
-                      : 'bg-white/[0.02] hover:bg-white/[0.05] border-white/[0.07] hover:border-white/20'
+                      ? 'bg-slate-100 dark:bg-[#0b172a] border-[#0284c7] dark:border-[#00e5ff] shadow-md dark:shadow-[0_0_25px_rgba(0,229,255,0.15)] ring-1 ring-[#0284c7]/50 dark:ring-[#00e5ff]/50'
+                      : 'bg-white dark:bg-white/[0.02] hover:bg-slate-50 dark:hover:bg-white/[0.05] border-slate-200 dark:border-white/[0.07] hover:border-slate-300 dark:hover:border-white/20'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-[#00e5ff]" />
-                      <h4 className="font-space text-base font-bold text-white group-hover:text-[#00e5ff] transition-colors">
+                      <span className="w-2 h-2 rounded-full bg-[#0284c7] dark:bg-[#00e5ff]" />
+                      <h4 className="font-space text-base font-bold text-slate-900 dark:text-white group-hover:text-[#0284c7] dark:group-hover:text-[#00e5ff] transition-colors">
                         {skill.name}
                       </h4>
                     </div>
-                    <span className="px-2 py-0.5 rounded-md text-[11px] font-mono-code bg-white/10 text-slate-300 border border-white/10">
+                    <span className="px-2 py-0.5 rounded-md text-[11px] font-mono-code bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10">
                       {skill.level}
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-400 font-jakarta leading-relaxed mt-2">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 font-jakarta leading-relaxed mt-2">
                     {skill.context}
                   </p>
 
-                  <div className="mt-3 flex items-center justify-between text-[11px] text-[#00e5ff] font-mono-code opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="mt-3 flex items-center justify-between text-[11px] text-[#0284c7] dark:text-[#00e5ff] font-mono-code opacity-0 group-hover:opacity-100 transition-opacity">
                     <span>Click to inspect details</span>
                     <ArrowRight className="w-3 h-3" />
                   </div>
@@ -107,11 +107,11 @@ export const SkillsSection: React.FC = () => {
           </div>
 
           {/* Interactive Inspection Terminal (4 cols) */}
-          <div className="lg:col-span-4 rounded-2xl bg-[#070d18] border border-white/10 p-6 shadow-2xl relative text-left">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+          <div className="lg:col-span-4 rounded-2xl bg-slate-50 dark:bg-[#070d18] border border-slate-200 dark:border-white/10 p-6 shadow-xl dark:shadow-2xl relative text-left">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10 mb-4">
               <div className="flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-[#00e5ff]" />
-                <span className="text-xs font-mono-code font-bold uppercase tracking-wider text-slate-300">
+                <Terminal className="w-4 h-4 text-[#0284c7] dark:text-[#00e5ff]" />
+                <span className="text-xs font-mono-code font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                   SYSTEM_TELEMETRY.sh
                 </span>
               </div>
@@ -125,19 +125,19 @@ export const SkillsSection: React.FC = () => {
             <div className="font-mono-code text-xs space-y-3">
               <div>
                 <span className="text-slate-500">// ACTIVE DOMAIN:</span>
-                <p className="text-[#00e5ff] font-bold text-sm mt-0.5">{currentCategory.title}</p>
-                <p className="text-slate-400 text-[11px] mt-0.5 leading-normal">{currentCategory.subtitle}</p>
+                <p className="text-[#0284c7] dark:text-[#00e5ff] font-bold text-sm mt-0.5">{currentCategory.title}</p>
+                <p className="text-slate-600 dark:text-slate-400 text-[11px] mt-0.5 leading-normal">{currentCategory.subtitle}</p>
               </div>
 
-              <div className="pt-3 border-t border-white/[0.06]">
+              <div className="pt-3 border-t border-slate-200 dark:border-white/[0.06]">
                 <span className="text-slate-500">// SELECTED INSPECTOR:</span>
                 {selectedSkill ? (
-                  <div className="mt-2 p-3 rounded-lg bg-white/[0.03] border border-[#00e5ff]/30 text-slate-200">
-                    <span className="text-white font-bold text-sm block">{selectedSkill}</span>
-                    <p className="text-slate-300 text-xs mt-1 leading-relaxed">
+                  <div className="mt-2 p-3 rounded-lg bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-[#00e5ff]/30 text-slate-800 dark:text-slate-200 shadow-sm">
+                    <span className="text-slate-900 dark:text-white font-bold text-sm block">{selectedSkill}</span>
+                    <p className="text-slate-700 dark:text-slate-300 text-xs mt-1 leading-relaxed">
                       {currentCategory.skills.find((s) => s.name === selectedSkill)?.context}
                     </p>
-                    <div className="mt-2 text-[10px] text-[#00e5ff] uppercase tracking-wider font-semibold">
+                    <div className="mt-2 text-[10px] text-[#0284c7] dark:text-[#00e5ff] uppercase tracking-wider font-semibold">
                       Status: Production Ready in Academic / Internship Projects
                     </div>
                   </div>
@@ -148,7 +148,7 @@ export const SkillsSection: React.FC = () => {
                 )}
               </div>
 
-              <div className="pt-3 border-t border-white/[0.06] text-[11px] text-slate-400">
+              <div className="pt-3 border-t border-slate-200 dark:border-white/[0.06] text-[11px] text-slate-600 dark:text-slate-400">
                 <span className="text-slate-500 block mb-1">// PRINCIPLES:</span>
                 <div className="space-y-1">
                   <div>✓ Strict defensive type safety & error handling</div>
@@ -158,10 +158,10 @@ export const SkillsSection: React.FC = () => {
               </div>
 
               {/* Coding Mascot Cameo */}
-              <div className="pt-4 border-t border-white/[0.06] flex items-center gap-3">
+              <div className="pt-4 border-t border-slate-200 dark:border-white/[0.06] flex items-center gap-3">
                 <MiluCharacter pose="coding" size="sm" mode="photo" className="w-12 h-12 shrink-0" />
-                <div className="p-2.5 rounded-xl bg-white/[0.03] border border-[#00e5ff]/20 text-[11px] font-mono-code text-slate-300">
-                  <span className="text-[#00e5ff] font-bold block mb-0.5">Milu is Coding:</span>
+                <div className="p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-[#00e5ff]/20 text-[11px] font-mono-code text-slate-700 dark:text-slate-300">
+                  <span className="text-[#0284c7] dark:text-[#00e5ff] font-bold block mb-0.5">Milu is Coding:</span>
                   "Select any skill node to see how I implemented it in my projects!"
                 </div>
               </div>
@@ -170,12 +170,12 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* What Defines My Working Style - Mindset Statements */}
-        <div className="pt-12 border-t border-white/10 text-left">
+        <div className="pt-12 border-t border-slate-200 dark:border-white/10 text-left">
           <div className="mb-8">
-            <span className="text-xs font-mono-code text-[#00e5ff] tracking-widest uppercase font-semibold block mb-2">
+            <span className="text-xs font-mono-code text-[#0284c7] dark:text-[#00e5ff] tracking-widest uppercase font-semibold block mb-2">
               BEYOND SYNTAX // CORE WORKING STYLE
             </span>
-            <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white">
+            <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
               Grounded in Real Experiences
             </h3>
           </div>
@@ -184,19 +184,19 @@ export const SkillsSection: React.FC = () => {
             {mindsetStatements.map((item, index) => (
               <div
                 key={index}
-                className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/15 transition-all duration-300 relative group"
+                className="p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] hover:border-slate-300 dark:hover:border-white/15 shadow-sm transition-all duration-300 relative group"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <Sparkles className="w-4 h-4 text-[#00e5ff]" />
-                  <h4 className="font-space text-lg font-bold text-white group-hover:text-[#00e5ff] transition-colors">
+                  <Sparkles className="w-4 h-4 text-[#0284c7] dark:text-[#00e5ff]" />
+                  <h4 className="font-space text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#0284c7] dark:group-hover:text-[#00e5ff] transition-colors">
                     {item.title}
                   </h4>
                 </div>
-                <p className="text-sm font-medium text-slate-200 font-jakarta leading-relaxed mb-3">
+                <p className="text-sm font-medium text-slate-800 dark:text-slate-200 font-jakarta leading-relaxed mb-3">
                   "{item.statement}"
                 </p>
-                <p className="text-xs text-slate-400 font-jakarta border-l-2 border-white/10 pl-3 leading-relaxed">
-                  <strong className="text-slate-300">Context: </strong>
+                <p className="text-xs text-slate-600 dark:text-slate-400 font-jakarta border-l-2 border-slate-300 dark:border-white/10 pl-3 leading-relaxed">
+                  <strong className="text-slate-800 dark:text-slate-300">Context: </strong>
                   {item.context}
                 </p>
               </div>

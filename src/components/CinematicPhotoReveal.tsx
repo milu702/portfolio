@@ -48,18 +48,18 @@ export const CinematicPhotoReveal: React.FC<CinematicPhotoRevealProps> = ({ phot
       <div className="fixed inset-0" onClick={onClose} />
 
       {/* Main Cinematic Frame */}
-      <div className="relative w-full max-w-4xl my-auto rounded-3xl bg-[#070d18] border border-white/20 shadow-[0_25px_90px_rgba(0,0,0,0.95)] overflow-hidden z-10 text-left flex flex-col max-h-[92vh]">
+      <div className="relative w-full max-w-4xl my-auto rounded-3xl bg-white dark:bg-[#070d18] border border-slate-200 dark:border-white/20 shadow-[0_25px_90px_rgba(0,0,0,0.3)] dark:shadow-[0_25px_90px_rgba(0,0,0,0.95)] overflow-hidden z-10 text-left flex flex-col max-h-[92vh]">
         {/* Top Header Bar */}
-        <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between bg-white/[0.02] shrink-0">
+        <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-white/[0.02] shrink-0">
           <div className="flex items-center gap-2.5">
-            <span className="p-2 rounded-xl bg-[#00e5ff]/10 text-[#00e5ff] border border-[#00e5ff]/30">
+            <span className="p-2 rounded-xl bg-[#00e5ff]/15 dark:bg-[#00e5ff]/10 text-[#0284c7] dark:text-[#00e5ff] border border-[#0284c7]/30 dark:border-[#00e5ff]/30">
               <Sparkles className="w-4 h-4" />
             </span>
             <div>
-              <span className="text-[10px] font-mono-code uppercase tracking-wider text-[#00e5ff] block font-bold">
+              <span className="text-[10px] font-mono-code uppercase tracking-wider text-[#0284c7] dark:text-[#00e5ff] block font-bold">
                 Photographic Archive // Authentic Record
               </span>
-              <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white tracking-tight">
+              <h3 className="font-cinzel text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                 {photo.title}
               </h3>
             </div>
@@ -68,7 +68,7 @@ export const CinematicPhotoReveal: React.FC<CinematicPhotoRevealProps> = ({ phot
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsZoomed(!isZoomed)}
-              className="p-2.5 rounded-full bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white transition-colors"
+              className="p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
               title={isZoomed ? 'Reset Zoom' : 'Zoom in on photo'}
               aria-label="Toggle Zoom"
             >
@@ -77,7 +77,7 @@ export const CinematicPhotoReveal: React.FC<CinematicPhotoRevealProps> = ({ phot
 
             <button
               onClick={onClose}
-              className="p-2.5 rounded-full bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white transition-colors"
+              className="p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
               aria-label="Close Photo View"
             >
               <X className="w-4 h-4" />
@@ -86,11 +86,11 @@ export const CinematicPhotoReveal: React.FC<CinematicPhotoRevealProps> = ({ phot
         </div>
 
         {/* Center Photograph Area with Ambient Light */}
-        <div className="relative p-4 sm:p-6 flex items-center justify-center bg-[#030610] overflow-hidden flex-grow min-h-[300px]">
+        <div className="relative p-4 sm:p-6 flex items-center justify-center bg-slate-100 dark:bg-[#030610] overflow-hidden flex-grow min-h-[300px]">
           {/* Ambient Spotlight */}
           <div className="absolute inset-0 bg-gradient-radial from-[#00e5ff]/15 via-transparent to-transparent pointer-events-none" />
 
-          <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl max-h-[55vh] flex items-center justify-center">
+          <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-2xl max-h-[55vh] flex items-center justify-center">
             <img
               src={photo.src}
               alt={photo.alt}
@@ -110,11 +110,11 @@ export const CinematicPhotoReveal: React.FC<CinematicPhotoRevealProps> = ({ phot
               className="w-14 h-14 drop-shadow-xl"
             />
             {photo.mascotNote && (
-              <div className="p-3 rounded-2xl bg-[#070d18]/95 border border-[#00e5ff]/40 shadow-xl backdrop-blur-md max-w-xs text-left animate-fadeIn pointer-events-auto">
-                <span className="text-[9px] font-mono-code font-bold uppercase text-[#00e5ff] block mb-0.5">
+              <div className="p-3 rounded-2xl bg-white/95 dark:bg-[#070d18]/95 border border-slate-200 dark:border-[#00e5ff]/40 shadow-xl backdrop-blur-md max-w-xs text-left animate-fadeIn pointer-events-auto">
+                <span className="text-[9px] font-mono-code font-bold uppercase text-[#0284c7] dark:text-[#00e5ff] block mb-0.5">
                   Milu's Note:
                 </span>
-                <p className="text-xs text-slate-200 font-jakarta leading-snug">
+                <p className="text-xs text-slate-800 dark:text-slate-200 font-jakarta leading-snug">
                   "{photo.mascotNote}"
                 </p>
               </div>
@@ -123,9 +123,9 @@ export const CinematicPhotoReveal: React.FC<CinematicPhotoRevealProps> = ({ phot
         </div>
 
         {/* Metadata & Caption Bottom Bar */}
-        <div className="p-4 sm:p-6 border-t border-white/10 bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shrink-0">
+        <div className="p-4 sm:p-6 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shrink-0">
           <div className="text-left max-w-xl">
-            <p className="text-xs sm:text-sm text-slate-300 font-jakarta leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-jakarta leading-relaxed">
               {photo.caption}
             </p>
 

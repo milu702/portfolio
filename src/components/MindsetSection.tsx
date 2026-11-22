@@ -94,16 +94,16 @@ export const MindsetSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col items-start mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff]" />
-            <span className="text-xs font-mono-code font-semibold tracking-[0.2em] uppercase text-slate-300">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] dark:bg-[#00e5ff]" />
+            <span className="text-xs font-mono-code font-semibold tracking-[0.2em] uppercase text-slate-600 dark:text-slate-300">
               08 // PRINCIPLES & STRENGTHS
             </span>
           </div>
-          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
-            What Defines <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#00e5ff] to-cyan-300">My Approach?</span>
+          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            What Defines <span className="gradient-text-cyan">My Approach?</span>
           </h2>
-          <p className="mt-3 text-lg text-slate-400 font-jakarta max-w-2xl">
+          <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 font-jakarta max-w-2xl">
             Eight authentic working principles forged through academic leadership, corporate internships, hackathon stewardship, and civic service.
           </p>
         </div>
@@ -121,37 +121,37 @@ export const MindsetSection: React.FC = () => {
                   onClick={() => setActivePillarIndex(idx)}
                   className={`p-4 rounded-xl text-left transition-all duration-300 border flex items-center justify-between group ${
                     isCurrent
-                      ? 'bg-gradient-to-r from-[#071329] to-[#0b1c3d] border-[#00e5ff] shadow-[0_0_20px_rgba(0,229,255,0.15)] translate-x-2'
-                      : 'bg-white/[0.02] hover:bg-white/[0.05] border-white/[0.06] hover:border-white/20'
+                      ? 'bg-slate-100 dark:bg-gradient-to-r dark:from-[#071329] dark:to-[#0b1c3d] border-[#0284c7] dark:border-[#00e5ff] shadow-md dark:shadow-[0_0_20px_rgba(0,229,255,0.15)] translate-x-2'
+                      : 'bg-white dark:bg-white/[0.02] hover:bg-slate-50 dark:hover:bg-white/[0.05] border-slate-200 dark:border-white/[0.06] hover:border-slate-300 dark:hover:border-white/20'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="font-mono-code text-xs font-bold text-slate-500 group-hover:text-[#00e5ff]">
+                    <span className="font-mono-code text-xs font-bold text-slate-500 group-hover:text-[#0284c7] dark:group-hover:text-[#00e5ff]">
                       {pillar.number}
                     </span>
-                    <Icon className={`w-4 h-4 ${isCurrent ? 'text-[#00e5ff]' : 'text-slate-400'}`} />
-                    <span className={`font-space text-sm font-semibold ${isCurrent ? 'text-white' : 'text-slate-300'}`}>
+                    <Icon className={`w-4 h-4 ${isCurrent ? 'text-[#0284c7] dark:text-[#00e5ff]' : 'text-slate-400'}`} />
+                    <span className={`font-space text-sm font-semibold ${isCurrent ? 'text-slate-900 dark:text-white font-bold' : 'text-slate-700 dark:text-slate-300'}`}>
                       {pillar.title.split('&')[0]}
                     </span>
                   </div>
-                  <span className={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-[#00e5ff]' : 'bg-transparent'}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-[#0284c7] dark:bg-[#00e5ff]' : 'bg-transparent'}`} />
                 </button>
               );
             })}
           </div>
 
           {/* Right: Expanded Cinematic Showcase Display (7 cols) */}
-          <div className="lg:col-span-7 rounded-3xl bg-gradient-to-b from-[#071329] to-[#040814] border border-white/15 p-8 sm:p-10 shadow-2xl relative text-left">
-            <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
+          <div className="lg:col-span-7 rounded-3xl bg-white dark:bg-gradient-to-b dark:from-[#071329] dark:to-[#040814] border border-slate-200 dark:border-white/15 p-8 sm:p-10 shadow-xl dark:shadow-2xl relative text-left">
+            <div className="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-white/10 mb-6">
               <div className="flex items-center gap-3">
-                <div className="p-3 rounded-2xl bg-[#00e5ff]/10 text-[#00e5ff] border border-[#00e5ff]/30 shadow-sm">
+                <div className="p-3 rounded-2xl bg-[#00e5ff]/15 dark:bg-[#00e5ff]/10 text-[#0284c7] dark:text-[#00e5ff] border border-[#0284c7]/30 dark:border-[#00e5ff]/30 shadow-sm">
                   <ActiveIcon className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono-code uppercase tracking-widest text-[#00e5ff]">
+                  <span className="text-xs font-mono-code uppercase tracking-widest text-[#0284c7] dark:text-[#00e5ff] font-bold">
                     PILLAR {activePillar.number} OF 08
                   </span>
-                  <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white tracking-tight mt-0.5">
+                  <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight mt-0.5">
                     {activePillar.title}
                   </h3>
                 </div>
@@ -160,32 +160,32 @@ export const MindsetSection: React.FC = () => {
 
             <div className="space-y-6">
               <div>
-                <span className="text-xs font-mono-code uppercase tracking-wider text-slate-400 block mb-2 font-semibold">
+                <span className="text-xs font-mono-code uppercase tracking-wider text-slate-600 dark:text-slate-400 block mb-2 font-semibold">
                   Core Engineering Philosophy
                 </span>
-                <p className="font-space text-lg sm:text-xl font-medium text-white leading-relaxed">
+                <p className="font-space text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed">
                   "{activePillar.coreStatement}"
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-                <span className="text-xs font-mono-code uppercase tracking-wider text-[#38bdf8] block mb-2 font-semibold">
+              <div className="p-5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08]">
+                <span className="text-xs font-mono-code uppercase tracking-wider text-[#0284c7] dark:text-[#38bdf8] block mb-2 font-semibold">
                   Grounded Real-World Experience
                 </span>
-                <p className="text-sm text-slate-300 font-jakarta leading-relaxed">
+                <p className="text-sm text-slate-700 dark:text-slate-300 font-jakarta leading-relaxed">
                   {activePillar.groundedExperience}
                 </p>
               </div>
 
               <div>
-                <span className="text-xs font-mono-code uppercase tracking-wider text-slate-400 block mb-2 font-semibold">
+                <span className="text-xs font-mono-code uppercase tracking-wider text-slate-600 dark:text-slate-400 block mb-2 font-semibold">
                   Key Verification Tags
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {activePillar.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 rounded-lg text-xs font-mono-code bg-white/[0.05] text-slate-200 border border-white/10"
+                      className="px-3 py-1 rounded-lg text-xs font-mono-code bg-slate-100 dark:bg-white/[0.05] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/10"
                     >
                       {tag}
                     </span>

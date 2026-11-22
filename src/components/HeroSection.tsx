@@ -4,11 +4,13 @@ import { personalInfo } from '../data/personal';
 import { MiluCharacter } from './MiluCharacter';
 import { CinematicPhotoReveal, type PhotoRevealData } from './CinematicPhotoReveal';
 import { soundEngine } from '../utils/audio';
+import { useTheme } from '../context/ThemeContext';
 
 export const HeroSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [selectedPhoto, setSelectedPhoto] = useState<PhotoRevealData | null>(null);
   const [mascotBubble, setMascotBubble] = useState<string>("Hi! I'm Milu ✨ Welcome to my living world!");
+  const { isLight } = useTheme();
 
   // Subtle interactive particle canvas for cinematic ambient light
   useEffect(() => {
@@ -38,7 +40,9 @@ export const HeroSection: React.FC = () => {
       color: string;
     }[] = [];
 
-    const colors = ['#00e5ff', '#818cf8', '#38bdf8', '#c084fc'];
+    const colors = isLight
+      ? ['#0284c7', '#6366f1', '#0ea5e9', '#8b5cf6']
+      : ['#00e5ff', '#818cf8', '#38bdf8', '#c084fc'];
     const particleCount = Math.min(Math.floor(window.innerWidth / 20), 60);
 
     for (let i = 0; i < particleCount; i++) {
@@ -65,9 +69,15 @@ export const HeroSection: React.FC = () => {
         height * 0.4,
         width * 0.6
       );
-      gradient.addColorStop(0, 'rgba(14, 30, 64, 0.35)');
-      gradient.addColorStop(0.5, 'rgba(6, 12, 28, 0.15)');
-      gradient.addColorStop(1, 'rgba(2, 4, 8, 0)');
+      if (isLight) {
+        gradient.addColorStop(0, 'rgba(224, 242, 254, 0.45)');
+        gradient.addColorStop(0.5, 'rgba(240, 249, 255, 0.2)');
+        gradient.addColorStop(1, 'rgba(248, 250, 252, 0)');
+      } else {
+        gradient.addColorStop(0, 'rgba(14, 30, 64, 0.35)');
+        gradient.addColorStop(0.5, 'rgba(6, 12, 28, 0.15)');
+        gradient.addColorStop(1, 'rgba(2, 4, 8, 0)');
+      }
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
@@ -95,8 +105,8 @@ export const HeroSection: React.FC = () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = '#00e5ff';
-            ctx.globalAlpha = (1 - dist / 120) * 0.12;
+            ctx.strokeStyle = isLight ? '#0284c7' : '#00e5ff';
+            ctx.globalAlpha = (1 - dist / 120) * (isLight ? 0.18 : 0.12);
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -113,7 +123,7 @@ export const HeroSection: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isLight]);
 
   const handlePortraitClick = () => {
     soundEngine.playChime();
@@ -152,7 +162,7 @@ export const HeroSection: React.FC = () => {
       />
 
       {/* Atmospheric Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#020408]/40 to-[#020408] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-deep)]/40 to-[var(--bg-deep)] pointer-events-none z-0" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-[#00e5ff]/10 via-[#3b82f6]/10 to-[#818cf8]/10 rounded-full blur-[140px] pointer-events-none animate-ambient z-0" />
 
       {/* Main Content Composition */}
@@ -163,48 +173,48 @@ export const HeroSection: React.FC = () => {
           <div className="flex items-center gap-3 mb-6">
             <div onClick={handleMascotGreet} className="cursor-pointer group relative">
               <MiluCharacter pose="wave" size="sm" mode="photo" className="w-14 h-14 group-hover:scale-110 transition-transform" />
-              <span className="absolute -top-1 -right-1 px-1.5 py-0.2 rounded-full text-[8px] font-mono-code font-bold bg-[#00e5ff] text-[#020408] shadow">
+              <span className="absolute -top-1 -right-1 px-1.5 py-0.2 rounded-full text-[8px] font-mono-code font-bold bg-[#0284c7] dark:bg-[#00e5ff] text-white dark:text-[#020408] shadow">
                 Tap!
               </span>
             </div>
 
-            <div className="relative p-3 rounded-2xl bg-white/[0.04] border border-[#00e5ff]/30 backdrop-blur-md shadow-lg max-w-sm">
-              <span className="text-[10px] font-mono-code uppercase text-[#00e5ff] block font-bold mb-0.5">
+            <div className="relative p-3 rounded-2xl bg-white/90 dark:bg-white/[0.04] border border-slate-200 dark:border-[#00e5ff]/30 backdrop-blur-md shadow-md dark:shadow-lg max-w-sm">
+              <span className="text-[10px] font-mono-code uppercase text-[#0284c7] dark:text-[#00e5ff] block font-bold mb-0.5">
                 Milu Says:
               </span>
-              <p className="text-xs text-slate-200 font-jakarta leading-snug">
+              <p className="text-xs text-slate-800 dark:text-slate-200 font-jakarta leading-snug">
                 "{mascotBubble}"
               </p>
             </div>
           </div>
 
           {/* Status Capsule */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.1] backdrop-blur-md mb-6 shadow-lg shadow-black/40">
-            <span className="w-2 h-2 rounded-full bg-[#00e5ff] animate-pulse" />
-            <span className="text-xs font-mono-code font-medium text-slate-300 tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.1] backdrop-blur-md mb-6 shadow-sm dark:shadow-lg dark:shadow-black/40">
+            <span className="w-2 h-2 rounded-full bg-[#0284c7] dark:bg-[#00e5ff] animate-pulse" />
+            <span className="text-xs font-mono-code font-medium text-slate-700 dark:text-slate-300 tracking-wider uppercase">
               Integrated MCA Scholar · Amal Jyothi Autonomous
             </span>
-            <span className="text-slate-600">|</span>
-            <span className="text-xs font-mono-code text-[#00e5ff] flex items-center gap-1">
+            <span className="text-slate-400 dark:text-slate-600">|</span>
+            <span className="text-xs font-mono-code text-[#0284c7] dark:text-[#00e5ff] flex items-center gap-1 font-semibold">
               <MapPin className="w-3 h-3" />
               Kattappana, Kerala
             </span>
           </div>
 
           {/* Oversized Cinematic Typography Name */}
-          <h1 className="font-cinzel text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-400 tracking-tight leading-[1.05] mb-4">
+          <h1 className="font-cinzel text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black gradient-text-hero tracking-tight leading-[1.05] mb-4">
             MILU JIJI
           </h1>
 
           {/* Sub-headline & Vision Statement */}
-          <div className="relative pl-5 border-l-2 border-[#00e5ff] mb-6">
-            <p className="font-space text-xl sm:text-2xl lg:text-3xl font-medium text-white tracking-wide">
+          <div className="relative pl-5 border-l-2 border-[#0284c7] dark:border-[#00e5ff] mb-6">
+            <p className="font-space text-xl sm:text-2xl lg:text-3xl font-medium text-slate-900 dark:text-white tracking-wide">
               {personalInfo.tagline}
             </p>
-            <p className="mt-2 text-sm sm:text-base text-slate-400 font-jakarta max-w-2xl leading-relaxed">
+            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 font-jakarta max-w-2xl leading-relaxed">
               Aspiring software developer with a practical mindset for full-stack engineering, 
               scalable REST APIs, and applied agricultural computing. Architect of{' '}
-              <a href="#projects" className="text-[#00e5ff] hover:underline font-semibold">
+              <a href="#projects" className="text-[#0284c7] dark:text-[#00e5ff] hover:underline font-semibold">
                 Cardora
               </a>
               {' '}— a smart agro-climatic decision support system.
@@ -213,27 +223,27 @@ export const HeroSection: React.FC = () => {
 
           {/* Metric Highlights Pill Row */}
           <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-xl mb-8">
-            <div className="p-3 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
-              <div className="font-mono-code text-lg sm:text-2xl font-bold text-[#00e5ff]">
+            <div className="p-3 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm">
+              <div className="font-mono-code text-lg sm:text-2xl font-bold text-[#0284c7] dark:text-[#00e5ff]">
                 Rank 1 & 2
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-400 font-jakarta mt-0.5">
+              <div className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
                 Semester Top Ranker
               </div>
             </div>
-            <div className="p-3 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
-              <div className="font-mono-code text-lg sm:text-2xl font-bold text-white">
+            <div className="p-3 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm">
+              <div className="font-mono-code text-lg sm:text-2xl font-bold text-slate-900 dark:text-white">
                 Full-Stack
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-400 font-jakarta mt-0.5">
+              <div className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
                 React · Node · Python
               </div>
             </div>
-            <div className="p-3 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
-              <div className="font-mono-code text-lg sm:text-2xl font-bold text-[#818cf8]">
+            <div className="p-3 sm:p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] backdrop-blur-sm shadow-sm">
+              <div className="font-mono-code text-lg sm:text-2xl font-bold text-indigo-600 dark:text-[#818cf8]">
                 2022–2027
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-400 font-jakarta mt-0.5">
+              <div className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 font-jakarta mt-0.5">
                 Integrated MCA Batch
               </div>
             </div>
@@ -243,34 +253,34 @@ export const HeroSection: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
             <a
               href="#about"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#020408] text-sm font-bold tracking-wider uppercase hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] text-sm font-bold tracking-wider uppercase hover:shadow-[0_0_30px_rgba(2,132,199,0.3)] dark:hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] transition-all duration-300 hover:scale-105"
             >
-              <Sparkles className="w-4 h-4 text-[#020408]" />
+              <Sparkles className="w-4 h-4 text-white dark:text-[#020408]" />
               <span>Explore My World</span>
             </a>
 
             <a
               href="#projects"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-[#00e5ff]/50 text-white text-sm font-semibold tracking-wider uppercase backdrop-blur-md transition-all duration-300"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] border border-slate-300 dark:border-white/10 hover:border-[#0284c7]/50 dark:hover:border-[#00e5ff]/50 text-slate-900 dark:text-white text-sm font-semibold tracking-wider uppercase backdrop-blur-md transition-all duration-300"
             >
-              <Layers className="w-4 h-4 text-[#00e5ff]" />
+              <Layers className="w-4 h-4 text-[#0284c7] dark:text-[#00e5ff]" />
               <span>View Projects</span>
             </a>
 
             <a
               href={personalInfo.resumePdf}
               download="Milu_Jiji_Resume.pdf"
-              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-slate-300 hover:text-white text-sm font-medium tracking-wider uppercase transition-all duration-300"
+              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.03] dark:hover:bg-white/[0.08] border border-slate-300 dark:border-white/10 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-sm font-medium tracking-wider uppercase transition-all duration-300"
             >
-              <Download className="w-4 h-4 text-slate-400" />
+              <Download className="w-4 h-4 text-slate-500 dark:text-slate-400" />
               <span>Resume</span>
             </a>
 
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-transparent hover:bg-white/[0.05] border border-white/10 text-slate-300 hover:text-white text-sm font-medium tracking-wider uppercase transition-all duration-300"
+              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-transparent hover:bg-slate-100 dark:hover:bg-white/[0.05] border border-slate-300 dark:border-white/10 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-sm font-medium tracking-wider uppercase transition-all duration-300"
             >
-              <Send className="w-3.5 h-3.5 text-slate-400" />
+              <Send className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
               <span>Contact</span>
             </a>
           </div>
@@ -284,10 +294,10 @@ export const HeroSection: React.FC = () => {
             title="Click to reveal photograph in interactive cinematic viewer"
           >
             {/* Ambient Background Aura behind Portrait */}
-            <div className="absolute -inset-4 bg-gradient-to-b from-[#00e5ff]/25 via-[#3b82f6]/20 to-[#818cf8]/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-85 transition-opacity duration-700" />
+            <div className="absolute -inset-4 bg-gradient-to-b from-[#0284c7]/20 dark:from-[#00e5ff]/25 via-[#3b82f6]/20 to-[#818cf8]/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-85 transition-opacity duration-700" />
 
             {/* Angular Frame Border */}
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/20 group-hover:border-[#00e5ff]/60 bg-[#070d18] shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
+            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-200 dark:border-white/20 group-hover:border-[#0284c7]/60 dark:group-hover:border-[#00e5ff]/60 bg-slate-100 dark:bg-[#070d18] shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]">
               {/* Actual High Resolution Portrait of Milu Jiji */}
               <img
                 src={personalInfo.portraitImage}
@@ -297,34 +307,34 @@ export const HeroSection: React.FC = () => {
               />
 
               {/* Cinematic Vignette & Bottom Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#020408] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 dark:from-[#020408] via-transparent to-transparent opacity-70 dark:opacity-80" />
 
               {/* Click to Expand Prompt */}
-              <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#020408]/80 text-[#00e5ff] text-xs font-mono-code border border-[#00e5ff]/30 opacity-90 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 dark:bg-[#020408]/80 text-[#0284c7] dark:text-[#00e5ff] text-xs font-mono-code border border-[#0284c7]/30 dark:border-[#00e5ff]/30 opacity-90 group-hover:opacity-100 transition-opacity shadow-sm">
                 <ZoomIn className="w-3.5 h-3.5" />
                 <span>Interactive View</span>
               </div>
 
               {/* Editorial Frame Watermark */}
-              <div className="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1 rounded-md bg-[#020408]/70 backdrop-blur-md border border-white/10">
-                <div className="w-2 h-2 rounded-full bg-[#00e5ff]" />
-                <span className="text-[11px] font-mono-code font-semibold tracking-widest uppercase text-slate-200">
+              <div className="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1 rounded-md bg-white/90 dark:bg-[#020408]/70 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-sm">
+                <div className="w-2 h-2 rounded-full bg-[#0284c7] dark:bg-[#00e5ff]" />
+                <span className="text-[11px] font-mono-code font-semibold tracking-widest uppercase text-slate-800 dark:text-slate-200">
                   PORTFOLIO // 2026–27
                 </span>
               </div>
 
               {/* Lower Badge Info */}
-              <div className="absolute bottom-4 left-4 right-4 z-10 p-4 rounded-xl bg-[#020408]/85 backdrop-blur-md border border-white/10 flex items-center justify-between">
+              <div className="absolute bottom-4 left-4 right-4 z-10 p-4 rounded-xl bg-white/95 dark:bg-[#020408]/85 backdrop-blur-md border border-slate-200 dark:border-white/10 flex items-center justify-between shadow-lg">
                 <div>
-                  <h2 className="text-white font-cinzel text-base font-bold tracking-wider">
+                  <h2 className="text-slate-900 dark:text-white font-cinzel text-base font-bold tracking-wider">
                     Milu Jiji
                   </h2>
-                  <p className="text-xs text-[#00e5ff] font-mono-code mt-0.5">
+                  <p className="text-xs text-[#0284c7] dark:text-[#00e5ff] font-mono-code mt-0.5">
                     MCA Scholar · Amal Jyothi
                   </p>
                 </div>
                 <div
-                  className="p-2.5 rounded-lg bg-white/[0.08] hover:bg-[#00e5ff]/20 text-white hover:text-[#00e5ff] border border-white/10 transition-colors"
+                  className="p-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.08] dark:hover:bg-[#00e5ff]/20 text-slate-700 hover:text-slate-900 dark:text-white dark:hover:text-[#00e5ff] border border-slate-200 dark:border-white/10 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                 </div>
@@ -332,13 +342,13 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Floating Technical Coordinate Badge */}
-            <div className="absolute -bottom-5 -right-4 hidden sm:flex items-center gap-3 px-4 py-2 rounded-xl bg-[#070d18]/90 border border-[#00e5ff]/30 shadow-xl backdrop-blur-md">
-              <div className="w-8 h-8 rounded-lg bg-[#00e5ff]/10 flex items-center justify-center text-[#00e5ff]">
+            <div className="absolute -bottom-5 -right-4 hidden sm:flex items-center gap-3 px-4 py-2 rounded-xl bg-white/95 dark:bg-[#070d18]/90 border border-slate-200 dark:border-[#00e5ff]/30 shadow-xl backdrop-blur-md">
+              <div className="w-8 h-8 rounded-lg bg-[#0284c7]/10 dark:bg-[#00e5ff]/10 flex items-center justify-center text-[#0284c7] dark:text-[#00e5ff]">
                 <MapPin className="w-4 h-4" />
               </div>
               <div className="text-left">
-                <div className="text-[10px] text-slate-400 font-mono-code uppercase tracking-wider">Coordinates</div>
-                <div className="text-xs font-mono-code font-bold text-white">9.7499° N, 77.1354° E</div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono-code uppercase tracking-wider">Coordinates</div>
+                <div className="text-xs font-mono-code font-bold text-slate-900 dark:text-white">9.7499° N, 77.1354° E</div>
               </div>
             </div>
           </div>
@@ -348,14 +358,14 @@ export const HeroSection: React.FC = () => {
       {/* Cinematic Bottom Scroll Indicator */}
       <a
         href="#about"
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 group cursor-pointer text-slate-400 hover:text-[#00e5ff] transition-colors"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 group cursor-pointer text-slate-500 dark:text-slate-400 hover:text-[#0284c7] dark:hover:text-[#00e5ff] transition-colors"
         aria-label="Scroll to Explore"
       >
-        <span className="text-[10px] uppercase font-mono-code tracking-[0.25em] text-slate-400 group-hover:text-[#00e5ff] transition-colors">
+        <span className="text-[10px] uppercase font-mono-code tracking-[0.25em] text-slate-500 dark:text-slate-400 group-hover:text-[#0284c7] dark:group-hover:text-[#00e5ff] transition-colors">
           Scroll to Explore
         </span>
-        <div className="w-5 h-8 rounded-full border border-white/20 group-hover:border-[#00e5ff]/50 flex items-start justify-center p-1 transition-colors">
-          <div className="w-1 h-2 rounded-full bg-[#00e5ff] animate-bounce" />
+        <div className="w-5 h-8 rounded-full border border-slate-300 dark:border-white/20 group-hover:border-[#0284c7]/50 dark:group-hover:border-[#00e5ff]/50 flex items-start justify-center p-1 transition-colors">
+          <div className="w-1 h-2 rounded-full bg-[#0284c7] dark:bg-[#00e5ff] animate-bounce" />
         </div>
       </a>
 

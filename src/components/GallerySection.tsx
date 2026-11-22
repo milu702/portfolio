@@ -83,16 +83,16 @@ export const GallerySection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col items-start mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff]" />
-            <span className="text-xs font-mono-code font-semibold tracking-[0.2em] uppercase text-slate-300">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] dark:bg-[#00e5ff]" />
+            <span className="text-xs font-mono-code font-semibold tracking-[0.2em] uppercase text-slate-600 dark:text-slate-300">
               07 // VISUAL ARCHIVE & EVIDENCE
             </span>
           </div>
-          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
-            Visual Evidence & <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#00e5ff] to-cyan-300">System Diagrams</span>
+          <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Visual Evidence & <span className="gradient-text-cyan">System Diagrams</span>
           </h2>
-          <p className="mt-3 text-lg text-slate-400 font-jakarta max-w-2xl">
+          <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 font-jakarta max-w-2xl">
             Authentic photographs of leadership service, commercial industry engineering workstations, and detailed technical architecture blueprints.
           </p>
 
@@ -107,14 +107,14 @@ export const GallerySection: React.FC = () => {
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wider uppercase transition-all border flex items-center gap-1.5 ${
                     activeCategory === cat
-                      ? 'bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#020408] border-transparent font-bold shadow-md shadow-[#00e5ff]/20'
-                      : 'bg-white/[0.02] border-white/[0.08] text-slate-400 hover:text-white hover:bg-white/[0.05]'
+                      ? 'bg-gradient-to-r from-[#0284c7] to-[#38bdf8] dark:from-[#00e5ff] dark:to-[#38bdf8] text-white dark:text-[#020408] border-transparent font-bold shadow-md shadow-[#0284c7]/20 dark:shadow-[#00e5ff]/20'
+                      : 'bg-white dark:bg-white/[0.02] border-slate-200 dark:border-white/[0.08] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.05]'
                   }`}
                 >
                   <span>{cat}</span>
                   <span
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono-code ${
-                      activeCategory === cat ? 'bg-[#020408]/20 text-[#020408]' : 'bg-white/10 text-slate-300'
+                      activeCategory === cat ? 'bg-white/30 dark:bg-[#020408]/20 text-white dark:text-[#020408] font-bold' : 'bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     {count}
@@ -135,7 +135,7 @@ export const GallerySection: React.FC = () => {
               <div
                 key={image.id}
                 onClick={() => handleItemClick(image)}
-                className={`group relative rounded-2xl overflow-hidden border border-white/10 bg-[#070d18] shadow-xl transition-all duration-500 cursor-pointer hover:border-[#00e5ff]/50 hover:shadow-[0_15px_40px_rgba(0,229,255,0.15)] ${
+                className={`group relative rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-[#070d18] shadow-md dark:shadow-xl transition-all duration-500 cursor-pointer hover:border-[#0284c7]/50 dark:hover:border-[#00e5ff]/50 hover:shadow-[0_15px_40px_rgba(2,132,199,0.15)] dark:hover:shadow-[0_15px_40px_rgba(0,229,255,0.15)] ${
                   isTall ? 'sm:row-span-2' : ''
                 }`}
               >
